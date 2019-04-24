@@ -3,12 +3,13 @@ services:
   db:
     build: ./docker/mysql
     image: mysql:5.7
+    container_name: mysql_host
     restart: always
     environment:
-      MYSQL_DATABASE: sample_db
-      MYSQL_USER: user
+      MYSQL_DATABASE: micro_post
+      MYSQL_USER: ojisan
       MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: password
     ports:
       - "3314:3306"
     volumes:

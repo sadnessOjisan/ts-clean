@@ -18,8 +18,10 @@ $ docker-compose up -d
 $ docker-compose ps
 
 $ docker exec -it ${container名} bash
+
+$ docker-compose down
 ```
 
 ```
-SHOW DATABASES
+> SHOW DATABASES;
 ```
