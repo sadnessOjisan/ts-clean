@@ -1,0 +1,23 @@
+{
+  "name": "ts-clean",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/sadnessOjisan/ts-clean.git",
+  "author": "sadness_ojisan <sadness.ojisan@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "mysql": "^2.17.1"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^4.16.1",
+    "@types/mysql": "^2.15.6",
+    "typescript": "^3.4.5"
+  },
+  "scripts": {
+    "build:local": "tsc -p tsconfig.json",
+    "start:local": "node dist/main.js"
+  }
+}

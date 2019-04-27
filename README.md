@@ -17,6 +17,7 @@ $ docker-compose up -d
 
 $ docker-compose ps
 
+# コンテナに入る
 $ docker exec -it ${container名} bash
 
 $ docker-compose down
