@@ -1,0 +1,1 @@
+{"version":3,"file":"ApplicationSerializer.js","sourceRoot":"","sources":["../../../src/interface/serializer/ApplicationSerializer.ts"],"names":[],"mappings":";;AAAA,MAAM,qBAAqB;IACzB,KAAK,CAAC,IAAY;QAChB,IAAI,IAAI,KAAK,MAAM,EAAE;YACnB,OAAO,YAAY,CAAC;SACrB;aAAM;YACL,OAAO,eAAe,CAAC;SACxB;IACH,CAAC;CACF;AAEQ,sDAAqB"}

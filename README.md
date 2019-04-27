@@ -2,7 +2,19 @@
 
 ## how to
 
-Docker の起動
+### local app 起動
+
+memory を使っての開発
+
+```
+$ yarn run build:local
+
+$ yarn run start:local
+```
+
+/api/users/:id, /api/users に access 可能
+
+### Docker の起動
 
 ```
 # コンテナイメージの作成

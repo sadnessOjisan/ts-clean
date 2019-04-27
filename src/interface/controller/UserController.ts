@@ -9,14 +9,19 @@ class UserController {
 
   constructor() {
     this.userSerializer = new UserSerializer();
-    this.userRepository = new UserRepository();
+    this.userRepository = new UserRepository(); // 実DB使うときはここにIDBConnectionを渡すこと
   }
 
   async findUser(req: any, res: any) {
-    const id = req.params.id;
-    const useCase = new FindUser(this.userRepository);
-    let result = await useCase.getUser(id);
-    return this.userSerializer.user(result);
+    try {
+      console.log("req.params: ", req.params);
+      const id: number = Number(req.params.id);
+      const useCase = new FindUser(this.userRepository);
+      let result = await useCase.getUser(id);
+      return this.userSerializer.user(result);
+    } catch {
+      return this.userSerializer.error("hoge");
+    }
   }
 
   async findAllUser(req: any, res: any) {

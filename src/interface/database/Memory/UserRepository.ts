@@ -1,12 +1,14 @@
 import { User } from "../../../domain/User";
 import { IUserRepository } from "../../../application/repository/user/IUserRepository";
+import { resolve } from "path";
+import { rejects } from "assert";
 
 class UserRepository extends IUserRepository {
   private users: User[];
 
   constructor() {
     super();
-    const user1 = new User("samle", 3, 3);
+    const user1 = new User("samle", 3, 1);
     const user2 = new User("samle2", 3, 3);
     this.users = [user1, user2];
   }
@@ -18,8 +20,11 @@ class UserRepository extends IUserRepository {
     return user;
   }
 
-  async find(id: number): Promise<User> {
+  async find(id: number): Promise<User> | null {
     let queryResults = this.users.filter(user => user.id === id);
+    if (queryResults.length === 0) {
+      return null;
+    }
     return this.convertModel(queryResults[0]);
   }
 

@@ -1,4 +1,5 @@
 import { User } from "../../domain/User";
+import { ApplicationSerializer } from "./ApplicationSerializer";
 
 const _serializeSingleUser = (user: User) => {
   return {
@@ -7,7 +8,7 @@ const _serializeSingleUser = (user: User) => {
   };
 };
 
-export class UserSerializer {
+export class UserSerializer extends ApplicationSerializer {
   user(data: User) {
     if (!data) {
       throw new Error("expect data to be not undefined nor null");
