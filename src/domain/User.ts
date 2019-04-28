@@ -1,5 +1,5 @@
 class User {
-  private _id: number;
+  private _id: number; // Q: idってnullでもいいかな？
   private _name: string;
   private _age: number;
 
@@ -27,7 +27,7 @@ class User {
     this._id = id;
   }
 
-  constructor(name: string = null, age: number = null, id: number = null) {
+  constructor(id: number = null, name: string = null, age: number = null) {
     this._name = name;
     this._age = age;
     this._id = id;

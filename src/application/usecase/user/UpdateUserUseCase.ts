@@ -1,6 +1,6 @@
-import { User } from "../../domain/User";
-import { IUserRepository } from "../repository/user/IUserRepository";
-import { toUpdateUserDTO } from "../repository/user/DTO";
+import { User } from "../../../domain/User";
+import { IUserRepository } from "../../repository/user/IUserRepository";
+import { toUpdateUserDTO } from "../../repository/user/DTO";
 
 class UpdateUserUseCase {
   private userRepository: IUserRepository;

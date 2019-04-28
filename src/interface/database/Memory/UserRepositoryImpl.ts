@@ -3,18 +3,19 @@ import { IUserRepository } from "../../../application/repository/user/IUserRepos
 import { resolve } from "path";
 import { rejects } from "assert";
 
-class UserRepository extends IUserRepository {
+class UserRepositoryImpl extends IUserRepository {
   private users: User[];
 
   constructor() {
     super();
-    const user1 = new User("samle", 3, 1);
-    const user2 = new User("samle2", 3, 3);
+    const user1 = new User(1, "samle", 3);
+    const user2 = new User(2, "samle2", 3);
     this.users = [user1, user2];
   }
 
   private convertModel(r: any) {
     let user = new User();
+    user.id = r.id;
     user.name = r.name;
     user.age = r.age;
     return user;
@@ -30,13 +31,21 @@ class UserRepository extends IUserRepository {
 
   async findAll(): Promise<Array<User>> {
     let queryResults = this.users;
-    console.log("queryResults:", queryResults);
     const results = queryResults.map((m: any) => {
       return this.convertModel(m);
     });
 
     return results;
   }
+
+  async create(user: User): Promise<User> {
+    const userIds = this.users.map(user => user.id);
+    const maxId: number = Math.max.apply(null, userIds);
+    const newId = maxId + 1;
+    const newUser = new User(newId, user.name, user.age);
+    this.users.push(newUser);
+    return newUser;
+  }
 }
 
-export { UserRepository };
+export { UserRepositoryImpl as UserRepository };

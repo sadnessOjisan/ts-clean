@@ -1,6 +1,6 @@
-import { User } from "../../domain/User";
-import { IUserRepository } from "../repository/user/IUserRepository";
-import { toCreateUserDTO } from "../repository/user/DTO";
+import { User } from "../../../domain/User";
+import { IUserRepository } from "../../repository/user/IUserRepository";
+import { toCreateUserDTO } from "../../repository/user/DTO";
 
 class CreateUser {
   private userRepository: IUserRepository;
