@@ -22,4 +22,8 @@ export class UserSerializer extends ApplicationSerializer {
     }
     return data.map(d => _serializeSingleUser(d));
   }
+
+  delete() {
+    return {};
+  }
 }
