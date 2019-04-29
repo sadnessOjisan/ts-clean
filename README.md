@@ -56,6 +56,18 @@ $ curl -X PATCH -H "Content-Type: application/json" -d '{"age":100}' localhost:3
 
 # user削除
 $ curl -X DELETE localhost:3000/api/users/2
+
+# post作成
+$ curl -X POST -H "Content-Type: application/json" -d '{"content":"aho", "userId":1}' localhost:3000/api/posts
+
+# post全件取得
+$ curl localhost:3000/api/posts
+
+# post1件取得
+$ curl localhost:3000/api/posts/1
+
+# post削除
+$ curl -X DELETE localhost:3000/api/posts/2
 ```
 
 ## todo
@@ -66,3 +78,9 @@ $ curl -X DELETE localhost:3000/api/users/2
 - [ ] login と画像投稿を実装する
 - [ ] sql の導入
 - [ ] どこかに deploy(terraform 使いたいなぁ)
+
+## ts + express で厳しいと思ったところ
+
+- validation めんどくさい
+- 例外を上にあげるのめんどくさい
+- inteliJ の自動生成ほしい

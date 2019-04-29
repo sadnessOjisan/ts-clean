@@ -1,15 +1,20 @@
 import express = require("express");
+// TODO: controllerを集約したい
 import { UserController } from "../interface/controller/UserController";
-// import { MysqlConnection } from "./MysqlConnection";
+import { PostController } from "../interface/controller/PostController";
 import { TCreateUserRequest } from "../interface/request/user/CreateUserRequest";
 import { TFindUserRequest } from "../interface/request/user/FindUserRequest";
 import { IUpdateUserRequest } from "../interface/request/user/UpdateUserRequest";
 import { TDeleteUserRequest } from "../interface/request/user/DeleteUserRequest";
-// const mysqlConnection = new MysqlConnection();
+import { TFindPostRequest } from "../interface/request/post/FindPostRequest";
+import { TCreatePostRequest } from "../interface/request/post/CreatePostRequest";
+import { TDeletePostRequest } from "../interface/request/post/DeletePostRequest";
+
 const userController = new UserController();
-// const userController = new UserController(mysqlConnection);
+const postController = new PostController();
 const router = express.Router();
 
+// user
 router.get("/users", async (req: express.Request, res: express.Response) => {
   let results = await userController.findAllUser(req, res);
   res.send(results);
@@ -43,6 +48,36 @@ router.delete(
   "/users/:id",
   async (req: TDeleteUserRequest, res: express.Response) => {
     let result = await userController.deleteUser(req, res);
+    res.send(result);
+  }
+);
+
+// post
+router.get("/posts", async (req: express.Request, res: express.Response) => {
+  let results = await postController.findAllPost(req, res);
+  res.send(results);
+});
+
+router.get(
+  "/posts/:id",
+  async (req: TFindPostRequest, res: express.Response) => {
+    let result = await postController.findPost(req, res);
+    res.send(result);
+  }
+);
+
+router.post(
+  "/posts",
+  async (req: TCreatePostRequest, res: express.Response) => {
+    let result = await postController.createPost(req, res);
+    res.send(result);
+  }
+);
+
+router.delete(
+  "/posts/:id",
+  async (req: TDeletePostRequest, res: express.Response) => {
+    let result = await postController.deletePost(req, res);
     res.send(result);
   }
 );

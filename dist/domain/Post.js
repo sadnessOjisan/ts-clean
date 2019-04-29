@@ -26,4 +26,10 @@ class Post {
     }
 }
 exports.Post = Post;
+const PostBusinessRule = {
+    isPostLengthValid(postText) {
+        return postText.length > 0 && postText.length < 255;
+    }
+};
+exports.PostBusinessRule = PostBusinessRule;
 //# sourceMappingURL=Post.js.map

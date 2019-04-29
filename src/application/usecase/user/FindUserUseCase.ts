@@ -7,10 +7,6 @@ class FindUser {
     this.userRepository = userRepository;
   }
 
-  execute(id: number) {
-    return this.userRepository.find(id);
-  }
-
   getUser(id: number) {
     return this.userRepository.find(id);
   }

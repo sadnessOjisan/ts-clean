@@ -38,4 +38,10 @@ class Post {
   }
 }
 
-export { Post };
+const PostBusinessRule = {
+  isPostLengthValid(postText: string): boolean {
+    return postText.length > 0 && postText.length < 255;
+  }
+};
+
+export { Post, PostBusinessRule };
