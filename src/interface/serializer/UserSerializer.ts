@@ -3,6 +3,7 @@ import { ApplicationSerializer } from "./ApplicationSerializer";
 
 const _serializeSingleUser = (user: User) => {
   return {
+    id: user.id,
     name: user.name,
     age: user.age
   };

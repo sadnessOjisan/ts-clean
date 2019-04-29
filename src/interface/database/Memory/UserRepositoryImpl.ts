@@ -1,7 +1,10 @@
+/**
+ * repository層ではdtoを受け取ってDBに渡す役割を担う
+ */
+
 import { User } from "../../../domain/User";
 import { IUserRepository } from "../../../application/repository/user/IUserRepository";
-import { resolve } from "path";
-import { rejects } from "assert";
+import { TUpdateUserDTO } from "../../../application/repository/user/DTO";
 
 class UserRepositoryImpl extends IUserRepository {
   private users: User[];
@@ -45,6 +48,42 @@ class UserRepositoryImpl extends IUserRepository {
     const newUser = new User(newId, user.name, user.age);
     this.users.push(newUser);
     return newUser;
+  }
+
+  async update(userDTO: TUpdateUserDTO): Promise<User> {
+    let returnUser;
+
+    this.users = this.users.map(tu => {
+      if (tu.id === userDTO.id) {
+        let name;
+        let age;
+        if (userDTO.name) {
+          name = userDTO.name;
+        } else {
+          name = tu.name;
+        }
+        if (userDTO.age) {
+          age = userDTO.age;
+        } else {
+          age = tu.age;
+        }
+        const user = new User(userDTO.id, name, age);
+        returnUser = user;
+        console.log(returnUser);
+        return user;
+      } else {
+        returnUser = tu;
+        return tu;
+      }
+    });
+    return returnUser;
+  }
+
+  async delete(id: number): Promise<null> {
+    this.users = this.users.filter(user => {
+      return user.id !== id;
+    });
+    return null;
   }
 }
 

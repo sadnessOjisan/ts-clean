@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// Q: getter/setterからしか設定できないようにするメリットってなに？
 class User {
     get name() {
         return this._name;
@@ -19,7 +20,7 @@ class User {
     set id(id) {
         this._id = id;
     }
-    constructor(name = null, age = null, id = null) {
+    constructor(id = null, name = null, age = null) {
         this._name = name;
         this._age = age;
         this._id = id;

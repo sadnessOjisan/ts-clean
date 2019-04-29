@@ -4,4 +4,8 @@ interface TypedRequest<T> extends Request {
   params: T;
 }
 
-export { TypedRequest };
+interface TypedRequestBody<T> extends Request {
+  body: T;
+}
+
+export { TypedRequest, TypedRequestBody };

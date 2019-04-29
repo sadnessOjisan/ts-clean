@@ -1,3 +1,4 @@
+// Q: getter/setterからしか設定できないようにするメリットってなに？
 class User {
   private _id: number; // Q: idってnullでもいいかな？
   private _name: string;

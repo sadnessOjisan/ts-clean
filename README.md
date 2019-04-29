@@ -39,6 +39,25 @@ $ docker-compose down
 > SHOW DATABASES;
 ```
 
+## curl test
+
+```
+# user作成
+$ curl -X POST -H "Content-Type: application/json" -d '{"name":"aho", "age":100}' localhost:3000/api/users
+
+# user全件取得
+$ curl localhost:3000/api/users
+
+# user1件取得
+$ curl localhost:3000/api/users/1
+
+# user1件修正
+$ curl -X PATCH -H "Content-Type: application/json" -d '{"age":100}' localhost:3000/api/users/2
+
+# user削除
+$ curl -X DELETE localhost:3000/api/users/2
+```
+
 ## todo
 
 - [ ] swagger (いまはやらない（やり方わからない）。nestjs に移植した時にする)

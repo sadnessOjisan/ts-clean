@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const UserController_1 = require("../interface/controller/UserController");
-// import { MysqlConnection } from "./MysqlConnection";
 // const mysqlConnection = new MysqlConnection();
 const userController = new UserController_1.UserController();
 // const userController = new UserController(mysqlConnection);
@@ -21,6 +20,18 @@ router.get("/users", (req, res) => __awaiter(this, void 0, void 0, function* () 
 }));
 router.get("/users/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let result = yield userController.findUser(req, res);
+    res.send(result);
+}));
+router.post("/users", (req, res) => __awaiter(this, void 0, void 0, function* () {
+    let result = yield userController.createUser(req, res);
+    res.send(result);
+}));
+router.patch("/users/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
+    let result = yield userController.updateUser(req, res);
+    res.send(result);
+}));
+router.delete("/users/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
+    let result = yield userController.deleteUser(req, res);
     res.send(result);
 }));
 exports.default = router;

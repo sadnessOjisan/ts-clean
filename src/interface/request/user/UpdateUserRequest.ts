@@ -1,13 +1,18 @@
-import { TypedRequestBody } from "../ExpressRequest";
+import { Request } from "express";
 
 type Params = {
   name: string;
   age: number;
 };
 
-export type TCreateUserRequest = TypedRequestBody<Params>;
+export interface IUpdateUserRequest extends Request {
+  params: {
+    id: number;
+  };
+  body: Params;
+}
 
-export class CreateUserRequest {
+export class UpdateUserRequest {
   private _name: string;
   private _age: number;
 
@@ -20,7 +25,6 @@ export class CreateUserRequest {
   }
 
   constructor(params: Params) {
-    console.log(params);
     this.valid(params);
     this._name = params.name;
     this._age = params.age;
