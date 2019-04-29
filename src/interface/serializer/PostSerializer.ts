@@ -1,27 +1,32 @@
 import { Post } from "../../domain/Post";
 import { ApplicationSerializer } from "./ApplicationSerializer";
 
-const _serializeSinglePost = (post: Post) => {
-  return {
-    id: post.id,
-    content: post.content,
-    userId: post.userId
-  };
+type PostResponse = {
+  id: number;
+  content: string;
+  userName: string;
 };
 
 export class PostSerializer extends ApplicationSerializer {
-  post(data: Post) {
+  post(data: PostResponse) {
     if (!data) {
       throw new Error("expect data to be not undefined nor null");
     }
-    return _serializeSinglePost(data);
+    return data;
   }
 
-  posts(data: Post[]) {
+  posts(data: PostResponse[]) {
     if (!data) {
       throw new Error("expect data to be not undefined nor null");
     }
-    return data.map(d => _serializeSinglePost(d));
+    return data;
+  }
+
+  createPost(data: Post) {
+    if (!data) {
+      throw new Error("expect data to be not undefined nor null");
+    }
+    return data;
   }
 
   delete() {

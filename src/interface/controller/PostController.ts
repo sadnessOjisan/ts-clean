@@ -42,7 +42,7 @@ class PostController {
       const useCase = new PostUseCase.CreatePostUseCase(this.postRepository);
       const post = new Post(null, params.content, params.userId);
       let result = await useCase.createPost(post);
-      return this.postSerializer.post(result);
+      return this.postSerializer.createPost(result);
     } catch {
       return this.postSerializer.error("hoge");
     }

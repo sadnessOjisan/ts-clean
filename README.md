@@ -74,13 +74,18 @@ $ curl -X DELETE localhost:3000/api/posts/2
 
 - [ ] swagger (いまはやらない（やり方わからない）。nestjs に移植した時にする)
 - [ ] user の crud を完成
-- [ ] post と comment の crud を完成
-- [ ] login と画像投稿を実装する
+- [ ] post の crud を完成
+- [ ] login 実装
+- [ ] 画像投稿を実装
 - [ ] sql の導入
 - [ ] どこかに deploy(terraform 使いたいなぁ)
+- [ ] test 書く
+- [ ] builder ptn を作る
+- [ ] express の res を作って response を作る
 
 ## ts + express で厳しいと思ったところ
 
 - validation めんどくさい
 - 例外を上にあげるのめんどくさい
 - inteliJ の自動生成ほしい
+- swagger ほしい
