@@ -82,6 +82,7 @@ $ curl -X DELETE localhost:3000/api/posts/2
 - [ ] test 書く
 - [ ] builder ptn を作る
 - [ ] express の res を作って response を作る
+- [ ] build 周りの DX 向上
 
 ## ts + express で厳しいと思ったところ
 
