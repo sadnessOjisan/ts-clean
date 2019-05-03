@@ -52,7 +52,7 @@ $ curl -X PATCH -H "Content-Type: application/json" -d '{"age":100}' localhost:3
 $ curl -X DELETE localhost:3000/api/users/2
 
 # post作成
-$ curl -X POST -H "Content-Type: application/json" -d '{"content":"aho", "userId":1}' localhost:3000/api/posts
+$ curl -X POST -H "Content-Type: application/json" -d '{"content":"ahoooo", "userId":1}' localhost:3000/api/posts
 
 # post全件取得
 $ curl localhost:3000/api/posts

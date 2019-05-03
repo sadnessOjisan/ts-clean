@@ -4,18 +4,19 @@ import {
   TCreatePostRequest
 } from "../request/post/CreatePostRequest";
 import { PostSerializer } from "../serializer/PostSerializer";
-import { PostRepository } from "../database/Memory/PostRepositoryImpl";
+import { PostRepository } from "../database/MySQL/PostRepositoryImpl";
 import PostUseCase from "../../application/usecase/post";
 import { Post } from "../../domain/Post";
 import { TFindUserRequest } from "../request/user/FindUserRequest";
+import { IDBConnection } from "../database/MySQL/IDBConnection";
 
 class PostController {
   private postSerializer: PostSerializer;
   private postRepository: PostRepository;
 
-  constructor() {
+  constructor(dbConnection: IDBConnection) {
     this.postSerializer = new PostSerializer();
-    this.postRepository = new PostRepository(); // 実DB使うときはここにIDBConnectionを渡すこと
+    this.postRepository = new PostRepository(dbConnection);
   }
 
   async findPost(req: TFindUserRequest, res: any) {
@@ -24,7 +25,8 @@ class PostController {
       const useCase = new PostUseCase.FindPostUseCase(this.postRepository);
       let result = await useCase.getPost(id);
       return this.postSerializer.post(result);
-    } catch {
+    } catch (error) {
+      console.error(error);
       return this.postSerializer.error("hoge");
     }
   }
@@ -42,7 +44,8 @@ class PostController {
       const post = new Post(null, params.content, params.userId);
       let result = await useCase.createPost(post);
       return this.postSerializer.createPost(result);
-    } catch {
+    } catch (error) {
+      console.error(error);
       return this.postSerializer.error("hoge");
     }
   }
@@ -53,7 +56,8 @@ class PostController {
       const useCase = new PostUseCase.DeletePostUseCase(this.postRepository);
       await useCase.deletePost(id);
       return this.postSerializer.delete();
-    } catch {
+    } catch (error) {
+      console.error(error);
       return this.postSerializer.error("hoge");
     }
   }

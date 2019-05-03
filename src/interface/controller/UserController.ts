@@ -4,7 +4,7 @@ import {
   TCreateUserRequest
 } from "../request/user/CreateUserRequest";
 import { UserSerializer } from "../serializer/UserSerializer";
-import { UserRepository } from "../database/MySQL/UserRepository";
+import { UserRepository } from "../database/MySQL/UserRepositoryImpl";
 import { FindUser } from "../../application/usecase/user/FindUserUseCase";
 import { CreateUser } from "../../application/usecase/user/CreateUserUseCase";
 import { UpdateUserUseCase } from "../../application/usecase/user/UpdateUserUseCase";
@@ -74,7 +74,8 @@ class UserController {
       const useCase = new DeleteUserUseCase(this.userRepository);
       await useCase.deleteUser(id);
       return this.userSerializer.delete();
-    } catch {
+    } catch (error) {
+      console.error(error);
       return this.userSerializer.error("hoge");
     }
   }

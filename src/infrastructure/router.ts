@@ -13,7 +13,7 @@ import { MysqlConnection } from "../infrastructure/MysqlConnection";
 
 const con = new MysqlConnection();
 const userController = new UserController(con);
-const postController = new PostController();
+const postController = new PostController(con);
 const router = express.Router();
 
 // user
