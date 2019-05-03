@@ -20,7 +20,6 @@ export class CreateUserRequest {
   }
 
   constructor(params: Params) {
-    console.log(params);
     this.valid(params);
     this._name = params.name;
     this._age = params.age;

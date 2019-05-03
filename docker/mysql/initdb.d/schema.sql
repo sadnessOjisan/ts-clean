@@ -1,8 +1,7 @@
 -- 大文字・小文字をミスって繋がらなかった
-CREATE TABLE Users(
-    -- maxの計算いらなくなるなこれ
-    id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR (32) NOT NULL,
-    age INT (32) NOT NULL,
-    PRIMARY KEY (id)
+-- maxの計算いらなくなるなこれ
+CREATE TABLE Users (
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(32) NOT NULL,
+    age INT NOT NULL
 );

@@ -68,7 +68,6 @@ class UserRepositoryImpl extends IUserRepository {
         }
         const user = new User(userDTO.id, name, age);
         returnUser = user;
-        console.log(returnUser);
         return user;
       } else {
         returnUser = tu;

@@ -47,10 +47,10 @@ class UserController {
       const userParams = new CreateUserRequest(req.body);
       const useCase = new CreateUser(this.userRepository);
       const user = new User(null, userParams.name, userParams.age);
-
       let result = await useCase.createUser(user);
       return this.userSerializer.user(result);
-    } catch {
+    } catch (error) {
+      console.error(error);
       return this.userSerializer.error("hoge");
     }
   }

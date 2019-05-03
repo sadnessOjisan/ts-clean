@@ -38,7 +38,6 @@ class PostController {
   async createPost(req: TCreatePostRequest, res: any) {
     try {
       const params = new CreatePostRequest(req.body);
-      console.log(params);
       const useCase = new PostUseCase.CreatePostUseCase(this.postRepository);
       const post = new Post(null, params.content, params.userId);
       let result = await useCase.createPost(post);
