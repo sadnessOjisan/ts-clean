@@ -4,7 +4,7 @@ import {
   TCreateUserRequest
 } from "../request/user/CreateUserRequest";
 import { UserSerializer } from "../serializer/UserSerializer";
-import { UserRepository } from "../database/Memory/UserRepositoryImpl";
+import { UserRepository } from "../database/MySQL/UserRepository";
 import { FindUser } from "../../application/usecase/user/FindUserUseCase";
 import { CreateUser } from "../../application/usecase/user/CreateUserUseCase";
 import { UpdateUserUseCase } from "../../application/usecase/user/UpdateUserUseCase";
@@ -18,9 +18,9 @@ class UserController {
   private userSerializer: UserSerializer;
   private userRepository: UserRepository;
 
-  constructor() {
+  constructor(dbConnection: IDBConnection) {
     this.userSerializer = new UserSerializer();
-    this.userRepository = new UserRepository(); // 実DB使うときはここにIDBConnectionを渡すこと
+    this.userRepository = new UserRepository(dbConnection);
   }
 
   // MEMO: これJavaだったらannotationつけるだけで例外のハンドリングできるんだよなぁ・・・

@@ -12,11 +12,11 @@ export class MysqlConnection extends IDBConnection {
     this.pool = mysql.createPool({
       connectionLimit: 5,
       host: process.env.DB_HOST_DEV,
-      user: process.env.DB_USER_DEV,
-      password: process.env.DB_PASSWORD_DEV,
-      database: process.env.DB_NAME_DEV,
-      port: 33306,
-      timezone: "utc",
+      user: process.env.MYSQL_USER,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DATABASE,
+      port: Number(process.env.DB_PORT),
+      timezone: process.env.TIMEZONE,
       insecureAuth: false
     });
     this.pool.getConnection((error: any, connection: any) => {

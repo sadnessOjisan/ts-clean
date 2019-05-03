@@ -17,14 +17,8 @@ $ yarn run start:local
 ### Docker の起動
 
 ```
-# コンテナイメージの作成
-$ sudo docker build -t sadness_ojisan/mysql .
+$ docker-compose build
 
-# コンテナ起動
-$ sudo docker run -i -p 3306:3306 -t sadness_ojisan/mysql
-```
-
-```
 $ docker-compose up -d
 
 $ docker-compose ps

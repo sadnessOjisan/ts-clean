@@ -9,8 +9,10 @@ import { TDeleteUserRequest } from "../interface/request/user/DeleteUserRequest"
 import { TFindPostRequest } from "../interface/request/post/FindPostRequest";
 import { TCreatePostRequest } from "../interface/request/post/CreatePostRequest";
 import { TDeletePostRequest } from "../interface/request/post/DeletePostRequest";
+import { MysqlConnection } from "../infrastructure/MysqlConnection";
 
-const userController = new UserController();
+const con = new MysqlConnection();
+const userController = new UserController(con);
 const postController = new PostController();
 const router = express.Router();
 

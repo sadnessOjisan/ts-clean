@@ -19,14 +19,6 @@ class PostRepositoryImpl extends IPostRepository {
     DB.posts = [post1, post2];
   }
 
-  private convertModel(r: any) {
-    let post = new Post();
-    post.id = r.id;
-    post.content = r.content;
-    post.userId = r.userId;
-    return post;
-  }
-
   async find(id: number): Promise<TPostAndUserDTO> | null {
     let postResult = DB.posts.filter(post => post.id === id);
     if (postResult.length === 0) {
