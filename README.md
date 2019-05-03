@@ -64,20 +64,6 @@ $ curl localhost:3000/api/posts/1
 $ curl -X DELETE localhost:3000/api/posts/2
 ```
 
-## todo
-
-- [ ] swagger (いまはやらない（やり方わからない）。nestjs に移植した時にする)
-- [ ] user の crud を完成
-- [ ] post の crud を完成
-- [ ] login 実装
-- [ ] 画像投稿を実装
-- [ ] sql の導入
-- [ ] どこかに deploy(terraform 使いたいなぁ)
-- [ ] test 書く
-- [ ] builder ptn を作る
-- [ ] express の res を作って response を作る
-- [ ] build 周りの DX 向上
-
 ## ts + express で厳しいと思ったところ
 
 - validation めんどくさい
