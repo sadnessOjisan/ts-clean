@@ -6,8 +6,7 @@ import { Post } from "../../../domain/Post";
 import { IPostRepository } from "../../../application/repository/post/IPostRepository";
 import {
   TCreatePostDTO,
-  TPostAndUserDTO,
-  toPostAndUserDTO
+  TPostAndUserDTO
 } from "../../../application/repository/post/DTO";
 import { IDBConnection } from "./IDBConnection";
 

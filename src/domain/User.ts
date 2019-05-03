@@ -1,3 +1,7 @@
+/**
+ * memo: 最重要ビジネスルールと最重要ビジネスデータは同じファイルに閉じ込めるべし
+ */
+
 // Q: getter/setterからしか設定できないようにするメリットってなに？
 class User {
   private _id: number; // Q: idってnullでもいいかな？
@@ -35,4 +39,14 @@ class User {
   }
 }
 
-export { User };
+const UserBusinessRule = {
+  /**
+   * 名前は1文字以上、12文字未満
+   * @param name String
+   */
+  isNameLengthValid(name: string): boolean {
+    return name.length > 0 && name.length < 12;
+  }
+};
+
+export { User, UserBusinessRule };
