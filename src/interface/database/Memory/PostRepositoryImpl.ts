@@ -14,9 +14,6 @@ import {
 class PostRepositoryImpl extends IPostRepository {
   constructor() {
     super();
-    const post1 = new Post(1, "samle", 1);
-    const post2 = new Post(2, "samle2", 2);
-    DB.posts = [post1, post2];
   }
 
   async find(id: number): Promise<TPostAndUserDTO> | null {
