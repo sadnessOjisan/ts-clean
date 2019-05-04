@@ -1,7 +1,7 @@
 import { TypedRequest } from "../ExpressRequest";
 
 type Params = {
-  id: number;
+  id: string;
 };
 
 export type TFindPostRequest = TypedRequest<Params>;

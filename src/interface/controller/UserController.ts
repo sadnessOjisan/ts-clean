@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import {
   CreateUserRequest,
   TCreateUserRequest
@@ -12,7 +12,10 @@ import { DeleteUserUseCase } from "../../application/usecase/user/DeleteUserUseC
 import { IUpdateUserRequest } from "../request/user/UpdateUserRequest";
 import { IDBConnection } from "../database/MySQL/IDBConnection";
 import { User } from "../../domain/User";
-import { TFindUserRequest } from "../request/user/FindUserRequest";
+import {
+  TFindUserRequest,
+  FindUserRequest
+} from "../request/user/FindUserRequest";
 
 class UserController {
   private userSerializer: UserSerializer;
@@ -24,14 +27,14 @@ class UserController {
   }
 
   // MEMO: これJavaだったらannotationつけるだけで例外のハンドリングできるんだよなぁ・・・
-  async findUser(req: TFindUserRequest, res: any) {
+  async findUser(req: TFindUserRequest, res: Response) {
     try {
-      const id = Number(req.params.id);
+      const reqBody = new FindUserRequest(req.body);
       const useCase = new FindUser(this.userRepository);
-      let result = await useCase.getUser(id);
+      let result = await useCase.getUser(reqBody.id);
       return this.userSerializer.user(result);
-    } catch {
-      return this.userSerializer.error("hoge");
+    } catch (error) {
+      return this.userSerializer.error(error);
     }
   }
 
@@ -50,8 +53,7 @@ class UserController {
       let result = await useCase.createUser(user);
       return this.userSerializer.user(result);
     } catch (error) {
-      console.error(error);
-      return this.userSerializer.error("hoge");
+      return this.userSerializer.error(error);
     }
   }
 
@@ -63,8 +65,8 @@ class UserController {
       const user = new User(id, body.name, body.age);
       let result = await useCase.updateUser(user);
       return this.userSerializer.user(result);
-    } catch {
-      return this.userSerializer.error("hoge");
+    } catch (error) {
+      return this.userSerializer.error(error);
     }
   }
 
@@ -75,8 +77,7 @@ class UserController {
       await useCase.deleteUser(id);
       return this.userSerializer.delete();
     } catch (error) {
-      console.error(error);
-      return this.userSerializer.error("hoge");
+      return this.userSerializer.error(error);
     }
   }
 }

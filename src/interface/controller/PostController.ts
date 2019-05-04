@@ -26,8 +26,7 @@ class PostController {
       let result = await useCase.getPost(id);
       return this.postSerializer.post(result);
     } catch (error) {
-      console.error(error);
-      return this.postSerializer.error("hoge");
+      return this.postSerializer.error(error);
     }
   }
 
@@ -45,8 +44,7 @@ class PostController {
       let result = await useCase.createPost(post);
       return this.postSerializer.createPost(result);
     } catch (error) {
-      console.error(error);
-      return this.postSerializer.error("hoge");
+      return this.postSerializer.error(error);
     }
   }
 
@@ -57,8 +55,7 @@ class PostController {
       await useCase.deletePost(id);
       return this.postSerializer.delete();
     } catch (error) {
-      console.error(error);
-      return this.postSerializer.error("hoge");
+      return this.postSerializer.error(error);
     }
   }
 }

@@ -1,27 +1,40 @@
 import { User } from "../../domain/User";
-import { ApplicationSerializer } from "./ApplicationSerializer";
-
-const _serializeSingleUser = (user: User) => {
-  return {
-    id: user.id,
-    name: user.name,
-    age: user.age
-  };
-};
+import moment from "moment";
+import {
+  ApplicationSerializer,
+  TResponse,
+  StatusCode
+} from "./ApplicationSerializer";
 
 export class UserSerializer extends ApplicationSerializer {
-  user(data: User) {
+  user(data: User): TResponse<User> {
     if (!data) {
-      throw new Error("expect data to be not undefined nor null");
+      return {
+        code: StatusCode.exception,
+        message: "data is null",
+        responsed_at: moment().format()
+      };
     }
-    return _serializeSingleUser(data);
+    return {
+      code: StatusCode.success,
+      data,
+      responsed_at: moment().format()
+    };
   }
 
-  users(data: User[]) {
+  users(data: User[]): TResponse<User[]> {
     if (!data) {
-      throw new Error("expect data to be not undefined nor null");
+      return {
+        code: StatusCode.exception,
+        message: "data is null",
+        responsed_at: moment().format()
+      };
     }
-    return data.map(d => _serializeSingleUser(d));
+    return {
+      code: StatusCode.success,
+      data,
+      responsed_at: moment().format()
+    };
   }
 
   delete() {
