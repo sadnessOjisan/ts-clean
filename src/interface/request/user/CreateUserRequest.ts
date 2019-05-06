@@ -1,4 +1,5 @@
 import { TypedRequestBody } from "../ExpressRequest";
+import { StatusCode } from "../../../constant/ErrorCode";
 
 type Params = {
   name: string;
@@ -27,10 +28,20 @@ export class CreateUserRequest {
 
   private valid(params: Params) {
     if (params.name.length < 4) {
-      throw new Error("4文字以上の名前");
+      throw new Error(
+        JSON.stringify({
+          code: StatusCode.invalid,
+          message: "4文字以上の名前"
+        })
+      );
     }
     if (params.age < 12) {
-      throw new Error("登録は12才から");
+      throw new Error(
+        JSON.stringify({
+          code: StatusCode.invalid,
+          message: "登録は12才から"
+        })
+      );
     }
   }
 }

@@ -1,10 +1,7 @@
 import { User } from "../../../domain/User";
-import { IUserRepository } from "../../../application/repository/user/IUserRepository";
+import { IUserRepository } from "../repository/user/IUserRepository";
 import { IDBConnection } from "./IDBConnection";
-import {
-  TUpdateUserDTO,
-  TCreateUserDTO
-} from "../../../application/repository/user/DTO";
+import { TUpdateUserDTO, TCreateUserDTO } from "../repository/user/DTO";
 
 class UserRepository extends IUserRepository {
   private connection: IDBConnection;

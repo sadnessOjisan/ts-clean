@@ -6,8 +6,14 @@ import {
   StatusCode
 } from "./ApplicationSerializer";
 
+type UserResponse = {
+  id: number;
+  name: string;
+  age: number;
+};
+
 export class UserSerializer extends ApplicationSerializer {
-  user(data: User): TResponse<User> {
+  user(data: User): TResponse<UserResponse> {
     if (!data) {
       return {
         code: StatusCode.exception,
@@ -17,12 +23,16 @@ export class UserSerializer extends ApplicationSerializer {
     }
     return {
       code: StatusCode.success,
-      data,
+      data: {
+        id: data.id,
+        name: data.name,
+        age: data.age
+      },
       responsed_at: moment().format()
     };
   }
 
-  users(data: User[]): TResponse<User[]> {
+  users(data: User[]): TResponse<UserResponse[]> {
     if (!data) {
       return {
         code: StatusCode.exception,
@@ -32,7 +42,13 @@ export class UserSerializer extends ApplicationSerializer {
     }
     return {
       code: StatusCode.success,
-      data,
+      data: data.map(d => {
+        return {
+          id: d.id,
+          name: d.name,
+          age: d.age
+        };
+      }),
       responsed_at: moment().format()
     };
   }

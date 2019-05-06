@@ -1,4 +1,4 @@
-import { Post } from "../../../../domain/Post";
+import { Post } from "../../../../../domain/Post";
 import { toCreatePostDTO, toPostAndUserDTO } from "../DTO";
 
 describe("repository", () => {

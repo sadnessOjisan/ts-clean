@@ -3,11 +3,8 @@
  */
 
 import { Post } from "../../../domain/Post";
-import { IPostRepository } from "../../../application/repository/post/IPostRepository";
-import {
-  TCreatePostDTO,
-  TPostAndUserDTO
-} from "../../../application/repository/post/DTO";
+import { IPostRepository } from "../repository/post/IPostRepository";
+import { TCreatePostDTO, TPostAndUserDTO } from "../repository/post/DTO";
 import { IDBConnection } from "./IDBConnection";
 
 class PostRepositoryImpl extends IPostRepository {
@@ -19,7 +16,7 @@ class PostRepositoryImpl extends IPostRepository {
 
   async find(id: number): Promise<TPostAndUserDTO> {
     const postResult = await this.connection.execute(
-      "SELECT Posts.id, Posts.content, Users.name FROM Posts INNER JOIN Users ON Posts.user_id = Users.id;",
+      "SELECT Posts.id, Posts.content, Users.name AS userName FROM Posts INNER JOIN Users ON Posts.user_id = Users.id;",
       id
     );
     if (postResult.length === 0) {
@@ -31,19 +28,32 @@ class PostRepositoryImpl extends IPostRepository {
 
   async findAll(): Promise<Array<TPostAndUserDTO>> {
     let queryResults = await this.connection.execute(
-      "select Posts.id, Posts.content, Users.name from Posts INNER JOIN Users ON Posts.user_id = Users.id;"
+      "select Posts.id, Posts.content, Users.name AS userName from Posts INNER JOIN Users ON Posts.user_id = Users.id;"
     );
     return queryResults;
   }
 
-  async create(postDTO: TCreatePostDTO): Promise<Post> {
-    console.log("<create(postDTO: TCreatePostDTO)> postDTO: ", postDTO);
-    const user = await this.connection.execute(
+  /**
+   * createしたものを取り出す処理がガバガバ。他の人に挿入されると詰む。あとで治す
+   * @param postDTO
+   */
+  async create(postDTO: TCreatePostDTO): Promise<TPostAndUserDTO> {
+    await this.connection.execute(
       `INSERT INTO Posts (content, user_id) VALUES ("${postDTO.content}", ${
         postDTO.userId
       })`
     );
-    return user;
+    const idRow = await this.connection.execute("SELECT LAST_INSERT_ID();");
+    const id = idRow[0]["LAST_INSERT_ID()"];
+    const postResult = await this.connection.execute(
+      "SELECT Posts.id, Posts.content, Users.name AS userName FROM Posts INNER JOIN Users ON Posts.user_id = Users.id;",
+      id
+    );
+    if (postResult.length === 0) {
+      return null;
+    }
+    const postAndUserDTO = postResult[0];
+    return postAndUserDTO;
   }
 
   async delete(id: number): Promise<null> {

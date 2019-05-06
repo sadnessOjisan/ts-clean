@@ -2,10 +2,7 @@ import DB from "../MemoryDataBase";
 import { PostRepository } from "../PostRepositoryImpl";
 import { Post } from "../../../../domain/Post";
 import { User } from "../../../../domain/User";
-import {
-  toPostAndUserDTO,
-  toCreatePostDTO
-} from "../../../../application/repository/post/DTO";
+import { toPostAndUserDTO, toCreatePostDTO } from "../../repository/post/DTO";
 
 const setup = () => {
   DB.posts = [];

@@ -4,8 +4,8 @@
 
 import DB from "./MemoryDataBase";
 import { User } from "../../../domain/User";
-import { IUserRepository } from "../../../application/repository/user/IUserRepository";
-import { TUpdateUserDTO } from "../../../application/repository/user/DTO";
+import { IUserRepository } from "../repository/user/IUserRepository";
+import { TUpdateUserDTO } from "../repository/user/DTO";
 
 class UserRepositoryImpl extends IUserRepository {
   constructor() {

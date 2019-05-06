@@ -18,9 +18,10 @@ export class FindUserRequest {
   }
 
   private validRequest(params: Params) {
+    console.log(params);
     const id = params.id;
     const numberId = Number(id);
-    if (typeof numberId === "number") {
+    if (typeof numberId !== "number") {
       throw new Error(
         JSON.stringify({
           code: StatusCode.invalid,

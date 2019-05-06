@@ -1,5 +1,5 @@
-import { User } from "../../../domain/User";
-import { Post } from "../../../domain/Post";
+import { User } from "../../../../domain/User";
+import { Post } from "../../../../domain/Post";
 
 type TCreatePostDTO = { content: string; userId: number };
 

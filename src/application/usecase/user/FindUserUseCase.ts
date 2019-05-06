@@ -1,4 +1,4 @@
-import { IUserRepository } from "../../repository/user/IUserRepository";
+import { IUserRepository } from "../../../interface/database/repository/user/IUserRepository";
 
 class FindUser {
   private userRepository: IUserRepository;

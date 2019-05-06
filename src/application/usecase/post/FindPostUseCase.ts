@@ -1,4 +1,4 @@
-import { IPostRepository } from "../../repository/post/IPostRepository";
+import { IPostRepository } from "../../../interface/database/repository/post/IPostRepository";
 
 class FindPostUseCase {
   private postRepository: IPostRepository;

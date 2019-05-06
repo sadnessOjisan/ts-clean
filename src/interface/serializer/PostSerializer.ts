@@ -1,5 +1,10 @@
-import { Post } from "../../domain/Post";
-import { ApplicationSerializer } from "./ApplicationSerializer";
+import moment from "moment";
+import {
+  ApplicationSerializer,
+  TResponse,
+  StatusCode
+} from "./ApplicationSerializer";
+import { TPostAndUserDTO } from "../database/repository/post/DTO";
 
 type PostResponse = {
   id: number;
@@ -8,25 +13,52 @@ type PostResponse = {
 };
 
 export class PostSerializer extends ApplicationSerializer {
-  post(data: PostResponse) {
+  post(data: TPostAndUserDTO): TResponse<PostResponse> {
     if (!data) {
-      throw new Error("expect data to be not undefined nor null");
+      return {
+        code: StatusCode.exception,
+        message: "data is null",
+        responsed_at: moment().format()
+      };
     }
-    return data;
+    return {
+      code: StatusCode.success,
+      data: { id: data.id, content: data.content, userName: data.userName },
+      responsed_at: moment().format()
+    };
   }
 
-  posts(data: PostResponse[]) {
+  posts(data: TPostAndUserDTO[]): TResponse<PostResponse[]> {
     if (!data) {
-      throw new Error("expect data to be not undefined nor null");
+      return {
+        code: StatusCode.exception,
+        message: "data is null",
+        responsed_at: moment().format()
+      };
     }
-    return data;
+    return {
+      code: StatusCode.success,
+      data: data.map(d => {
+        return { id: d.id, content: d.content, userName: d.userName };
+      }),
+      responsed_at: moment().format()
+    };
   }
 
-  createPost(data: Post) {
+  createPost(data: TPostAndUserDTO): TResponse<PostResponse> {
+    console.log("data: ", data);
     if (!data) {
-      throw new Error("expect data to be not undefined nor null");
+      return {
+        code: StatusCode.exception,
+        message: "data is null",
+        responsed_at: moment().format()
+      };
     }
-    return data;
+    return {
+      code: StatusCode.success,
+      data: { id: data.id, content: data.content, userName: data.userName },
+      responsed_at: moment().format()
+    };
   }
 
   delete() {

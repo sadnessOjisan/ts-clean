@@ -4,12 +4,12 @@
 
 import DB from "./MemoryDataBase";
 import { Post } from "../../../domain/Post";
-import { IPostRepository } from "../../../application/repository/post/IPostRepository";
+import { IPostRepository } from "../repository/post/IPostRepository";
 import {
   TCreatePostDTO,
   TPostAndUserDTO,
   toPostAndUserDTO
-} from "../../../application/repository/post/DTO";
+} from "../repository/post/DTO";
 
 class PostRepositoryImpl extends IPostRepository {
   constructor() {
@@ -41,13 +41,18 @@ class PostRepositoryImpl extends IPostRepository {
     return results;
   }
 
-  async create(post: TCreatePostDTO): Promise<Post> {
+  async create(post: TCreatePostDTO): Promise<TPostAndUserDTO> {
     const postIds = DB.posts.map(post => post.id);
     const maxId: number = Math.max.apply(null, postIds);
     const newId = maxId + 1;
     const newPost = new Post(newId, post.content, post.userId);
     DB.posts.push(newPost);
-    return newPost;
+    let userResult = DB.users.filter(user => user.id === newPost.userId);
+    if (userResult.length === 0) {
+      return null;
+    }
+    const user = userResult[0];
+    return toPostAndUserDTO(newPost, user);
   }
 
   async delete(id: number): Promise<null> {

@@ -23,6 +23,7 @@
   "scripts": {
     "build:local": "tsc -p tsconfig.json",
     "start:local": "node dist/main.js",
+    "dev": "yarn run build:local && yarn run start:local",
     "test": "jest"
   }
 }

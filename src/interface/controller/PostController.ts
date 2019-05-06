@@ -19,7 +19,7 @@ class PostController {
     this.postRepository = new PostRepository(dbConnection);
   }
 
-  async findPost(req: TFindUserRequest, res: any) {
+  async findPost(req: TFindUserRequest) {
     try {
       const id = Number(req.params.id);
       const useCase = new PostUseCase.FindPostUseCase(this.postRepository);
@@ -30,13 +30,13 @@ class PostController {
     }
   }
 
-  async findAllPost(req: Request, res: any) {
+  async findAllPost(req: Request) {
     const useCase = new PostUseCase.FindPostUseCase(this.postRepository);
     let result = await useCase.getAllPosts();
     return this.postSerializer.posts(result);
   }
 
-  async createPost(req: TCreatePostRequest, res: any) {
+  async createPost(req: TCreatePostRequest) {
     try {
       const params = new CreatePostRequest(req.body);
       const useCase = new PostUseCase.CreatePostUseCase(this.postRepository);
@@ -48,7 +48,7 @@ class PostController {
     }
   }
 
-  async deletePost(req: any, res: any) {
+  async deletePost(req: any) {
     try {
       const id = Number(req.params.id);
       const useCase = new PostUseCase.DeletePostUseCase(this.postRepository);

@@ -27,9 +27,9 @@ class UserController {
   }
 
   // MEMO: これJavaだったらannotationつけるだけで例外のハンドリングできるんだよなぁ・・・
-  async findUser(req: TFindUserRequest, res: Response) {
+  async findUser(req: TFindUserRequest) {
     try {
-      const reqBody = new FindUserRequest(req.body);
+      const reqBody = new FindUserRequest(req.params);
       const useCase = new FindUser(this.userRepository);
       let result = await useCase.getUser(reqBody.id);
       return this.userSerializer.user(result);
@@ -38,13 +38,13 @@ class UserController {
     }
   }
 
-  async findAllUser(req: Request, res: any) {
+  async findAllUser(req: Request) {
     const useCase = new FindUser(this.userRepository);
     let result = await useCase.getAllUsers();
     return this.userSerializer.users(result);
   }
 
-  async createUser(req: TCreateUserRequest, res: any) {
+  async createUser(req: TCreateUserRequest) {
     try {
       // validationをするためにもRequestクラスからのinstance化は必要そう
       const userParams = new CreateUserRequest(req.body);
@@ -57,7 +57,7 @@ class UserController {
     }
   }
 
-  async updateUser(req: IUpdateUserRequest, res: any) {
+  async updateUser(req: IUpdateUserRequest) {
     try {
       const id = Number(req.params.id);
       const body = req.body;
@@ -70,7 +70,7 @@ class UserController {
     }
   }
 
-  async deleteUser(req: any, res: any) {
+  async deleteUser(req: any) {
     try {
       const id = Number(req.params.id);
       const useCase = new DeleteUserUseCase(this.userRepository);
