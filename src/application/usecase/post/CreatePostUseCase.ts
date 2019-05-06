@@ -1,15 +1,18 @@
 import { Post } from "../../../domain/Post";
 import { IPostRepository } from "../../../interface/database/repository/post/IPostRepository";
-import { toCreatePostDTO } from "../../../interface/database/repository/post/DTO";
+import {
+  toCreatePostDTO,
+  TPostAndUserDTO
+} from "../../../interface/database/repository/post/DTO";
 
 class CreatePostUseCase {
   private postRepository: IPostRepository;
 
-  constructor(postRepository: IPostRepository) {
+  public constructor(postRepository: IPostRepository) {
     this.postRepository = postRepository;
   }
 
-  createPost(post: Post) {
+  public createPost(post: Post): Promise<TPostAndUserDTO> {
     const postDTO = toCreatePostDTO(post);
     return this.postRepository.create(postDTO);
   }

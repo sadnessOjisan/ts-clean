@@ -11,7 +11,7 @@ interface TCreateUserDTO {
   age: number;
 }
 
-const toUpdateUserDTO = (user: TUpdateUserDTO) => {
+const toUpdateUserDTO = (user: User): TUpdateUserDTO => {
   return { id: user.id, name: user.name, age: user.age };
 };
 

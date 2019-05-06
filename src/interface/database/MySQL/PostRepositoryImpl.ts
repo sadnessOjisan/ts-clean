@@ -2,19 +2,18 @@
  * repository層ではdtoを受け取ってDBに渡す役割を担う
  */
 
-import { Post } from "../../../domain/Post";
 import { IPostRepository } from "../repository/post/IPostRepository";
 import { TCreatePostDTO, TPostAndUserDTO } from "../repository/post/DTO";
 import { IDBConnection } from "./IDBConnection";
 
 class PostRepositoryImpl extends IPostRepository {
   private connection: IDBConnection;
-  constructor(connection: IDBConnection) {
+  public constructor(connection: IDBConnection) {
     super();
     this.connection = connection;
   }
 
-  async find(id: number): Promise<TPostAndUserDTO> {
+  public async find(id: number): Promise<TPostAndUserDTO> {
     const postResult = await this.connection.execute(
       "SELECT Posts.id, Posts.content, Users.name AS userName FROM Posts INNER JOIN Users ON Posts.user_id = Users.id;",
       id
@@ -26,7 +25,7 @@ class PostRepositoryImpl extends IPostRepository {
     return postAndUserDTO;
   }
 
-  async findAll(): Promise<TPostAndUserDTO[]> {
+  public async findAll(): Promise<TPostAndUserDTO[]> {
     let queryResults = await this.connection.execute(
       "select Posts.id, Posts.content, Users.name AS userName from Posts INNER JOIN Users ON Posts.user_id = Users.id;"
     );
@@ -37,7 +36,7 @@ class PostRepositoryImpl extends IPostRepository {
    * createしたものを取り出す処理がガバガバ。他の人に挿入されると詰む。あとで治す
    * @param postDTO
    */
-  async create(postDTO: TCreatePostDTO): Promise<TPostAndUserDTO> {
+  public async create(postDTO: TCreatePostDTO): Promise<TPostAndUserDTO> {
     await this.connection.execute(
       `INSERT INTO Posts (content, user_id) VALUES ("${postDTO.content}", ${
         postDTO.userId
@@ -56,7 +55,7 @@ class PostRepositoryImpl extends IPostRepository {
     return postAndUserDTO;
   }
 
-  async delete(id: number): Promise<null> {
+  public async delete(id: number): Promise<null> {
     await this.connection.execute("delete from Posts where id = ?", id);
     return null;
   }

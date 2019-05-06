@@ -8,16 +8,16 @@ interface Params {
 export class FindUserRequest {
   private _id: number;
 
-  get id(): number {
+  public get id(): number {
     return this._id;
   }
 
-  constructor(params: Params) {
+  public constructor(params: Params) {
     const validId = this.validRequest(params);
     this._id = validId;
   }
 
-  private validRequest(params: Params) {
+  private validRequest(params: Params): number {
     console.log(params);
     const id = params.id;
     const numberId = Number(id);

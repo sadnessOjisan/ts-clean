@@ -6,19 +6,19 @@ import {
   StatusCode
 } from "./ApplicationSerializer";
 
-interface UserResponse {
+export interface UserResponse {
   id: number;
   name: string;
   age: number;
 }
 
 export class UserSerializer extends ApplicationSerializer {
-  user(data: User): TResponse<UserResponse> {
+  public user(data: User): TResponse<UserResponse> {
     if (!data) {
       return {
         code: StatusCode.exception,
         message: "data is null",
-        responsed_at: moment().format()
+        responsedAt: moment().format()
       };
     }
     return {
@@ -28,32 +28,38 @@ export class UserSerializer extends ApplicationSerializer {
         name: data.name,
         age: data.age
       },
-      responsed_at: moment().format()
+      responsedAt: moment().format()
     };
   }
 
-  users(data: User[]): TResponse<UserResponse[]> {
+  public users(data: User[]): TResponse<UserResponse[]> {
     if (!data) {
       return {
         code: StatusCode.exception,
         message: "data is null",
-        responsed_at: moment().format()
+        responsedAt: moment().format()
       };
     }
     return {
       code: StatusCode.success,
-      data: data.map(d => {
-        return {
-          id: d.id,
-          name: d.name,
-          age: d.age
-        };
-      }),
-      responsed_at: moment().format()
+      data: data.map(
+        (d): UserResponse => {
+          return {
+            id: d.id,
+            name: d.name,
+            age: d.age
+          };
+        }
+      ),
+      responsedAt: moment().format()
     };
   }
 
-  delete() {
-    return {};
+  public delete(): TResponse<Record<string, null>> {
+    return {
+      code: StatusCode.success,
+      data: {},
+      responsedAt: moment().format()
+    };
   }
 }

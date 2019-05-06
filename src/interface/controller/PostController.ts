@@ -2,23 +2,27 @@ import {
   CreatePostRequest,
   TCreatePostRequest
 } from "../request/post/CreatePostRequest";
-import { PostSerializer } from "../serializer/PostSerializer";
+import { PostSerializer, PostResponse } from "../serializer/PostSerializer";
 import { PostRepository } from "../database/MySQL/PostRepositoryImpl";
 import PostUseCase from "../../application/usecase/post";
 import { Post } from "../../domain/Post";
 import { TFindUserRequest } from "../request/user/FindUserRequest";
 import { IDBConnection } from "../database/MySQL/IDBConnection";
+import { TDeletePostRequest } from "../request/post/DeletePostRequest";
+import { TResponse } from "../serializer/ApplicationSerializer";
 
 class PostController {
   private postSerializer: PostSerializer;
   private postRepository: PostRepository;
 
-  constructor(dbConnection: IDBConnection) {
+  public constructor(dbConnection: IDBConnection) {
     this.postSerializer = new PostSerializer();
     this.postRepository = new PostRepository(dbConnection);
   }
 
-  async findPost(req: TFindUserRequest) {
+  public async findPost(
+    req: TFindUserRequest
+  ): Promise<TResponse<PostResponse> | TResponse<{}>> {
     try {
       const id = Number(req.params.id);
       const useCase = new PostUseCase.FindPostUseCase(this.postRepository);
@@ -29,13 +33,17 @@ class PostController {
     }
   }
 
-  async findAllPost() {
+  public async findAllPost(): Promise<
+    TResponse<PostResponse[]> | TResponse<{}>
+  > {
     const useCase = new PostUseCase.FindPostUseCase(this.postRepository);
     let result = await useCase.getAllPosts();
     return this.postSerializer.posts(result);
   }
 
-  async createPost(req: TCreatePostRequest) {
+  public async createPost(
+    req: TCreatePostRequest
+  ): Promise<TResponse<PostResponse> | TResponse<{}>> {
     try {
       const params = new CreatePostRequest(req.body);
       const useCase = new PostUseCase.CreatePostUseCase(this.postRepository);
@@ -47,7 +55,9 @@ class PostController {
     }
   }
 
-  async deletePost(req: any) {
+  public async deletePost(
+    req: TDeletePostRequest
+  ): Promise<TResponse<Record<string, null>> | TResponse<{}>> {
     try {
       const id = Number(req.params.id);
       const useCase = new PostUseCase.DeletePostUseCase(this.postRepository);

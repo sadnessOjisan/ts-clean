@@ -3,11 +3,11 @@ import { IPostRepository } from "../../../interface/database/repository/post/IPo
 class DeletePostUseCase {
   private postRepository: IPostRepository;
 
-  constructor(postRepository: IPostRepository) {
+  public constructor(postRepository: IPostRepository) {
     this.postRepository = postRepository;
   }
 
-  deletePost(id: number) {
+  public deletePost(id: number): Promise<null> {
     return this.postRepository.delete(id);
   }
 }

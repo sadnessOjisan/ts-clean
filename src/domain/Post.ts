@@ -3,31 +3,31 @@ class Post {
   private _content: string;
   private _userId: number;
 
-  get id(): number {
+  public get id(): number {
     return this._id;
   }
 
-  set id(id: number) {
+  public set id(id: number) {
     this._id = id;
   }
 
-  get content(): string {
+  public get content(): string {
     return this._content;
   }
 
-  set content(content: string) {
+  public set content(content: string) {
     this._content = content;
   }
 
-  get userId(): number {
+  public get userId(): number {
     return this._userId;
   }
 
-  set userId(userId: number) {
+  public set userId(userId: number) {
     this._userId = userId;
   }
 
-  constructor(
+  public constructor(
     id: number = null,
     content: string = null,
     userId: number = null

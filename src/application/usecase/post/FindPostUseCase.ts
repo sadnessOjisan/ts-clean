@@ -1,17 +1,18 @@
 import { IPostRepository } from "../../../interface/database/repository/post/IPostRepository";
+import { TPostAndUserDTO } from "../../../interface/database/repository/post/DTO";
 
 class FindPostUseCase {
   private postRepository: IPostRepository;
 
-  constructor(postRepository: IPostRepository) {
+  public constructor(postRepository: IPostRepository) {
     this.postRepository = postRepository;
   }
 
-  getPost(id: number) {
+  public getPost(id: number): Promise<TPostAndUserDTO> {
     return this.postRepository.find(id);
   }
 
-  getAllPosts() {
+  public getAllPosts(): Promise<TPostAndUserDTO[]> {
     return this.postRepository.findAll();
   }
 }

@@ -6,62 +6,67 @@ import {
 } from "./ApplicationSerializer";
 import { TPostAndUserDTO } from "../database/repository/post/DTO";
 
-interface PostResponse {
+export interface PostResponse {
   id: number;
   content: string;
   userName: string;
 }
 
 export class PostSerializer extends ApplicationSerializer {
-  post(data: TPostAndUserDTO): TResponse<PostResponse> {
+  public post(data: TPostAndUserDTO): TResponse<PostResponse> {
     if (!data) {
       return {
         code: StatusCode.exception,
         message: "data is null",
-        responsed_at: moment().format()
+        responsedAt: moment().format()
       };
     }
     return {
       code: StatusCode.success,
       data: { id: data.id, content: data.content, userName: data.userName },
-      responsed_at: moment().format()
+      responsedAt: moment().format()
     };
   }
 
-  posts(data: TPostAndUserDTO[]): TResponse<PostResponse[]> {
+  public posts(data: TPostAndUserDTO[]): TResponse<PostResponse[]> {
     if (!data) {
       return {
         code: StatusCode.exception,
         message: "data is null",
-        responsed_at: moment().format()
+        responsedAt: moment().format()
       };
     }
     return {
       code: StatusCode.success,
-      data: data.map(d => {
-        return { id: d.id, content: d.content, userName: d.userName };
-      }),
-      responsed_at: moment().format()
+      data: data.map(
+        (d): PostResponse => {
+          return { id: d.id, content: d.content, userName: d.userName };
+        }
+      ),
+      responsedAt: moment().format()
     };
   }
 
-  createPost(data: TPostAndUserDTO): TResponse<PostResponse> {
-    console.log("data: ", data);
+  public createPost(data: TPostAndUserDTO): TResponse<PostResponse> {
     if (!data) {
       return {
         code: StatusCode.exception,
         message: "data is null",
-        responsed_at: moment().format()
+        responsedAt: moment().format()
       };
     }
     return {
       code: StatusCode.success,
       data: { id: data.id, content: data.content, userName: data.userName },
-      responsed_at: moment().format()
+      responsedAt: moment().format()
     };
   }
 
-  delete() {
-    return {};
+  public delete(): TResponse<Record<string, null>> {
+    return {
+      code: StatusCode.success,
+      data: {},
+      responsedAt: moment().format()
+    };
   }
 }

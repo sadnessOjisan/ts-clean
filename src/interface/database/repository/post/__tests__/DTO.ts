@@ -1,9 +1,9 @@
 import { Post } from "../../../../../domain/Post";
-import { toCreatePostDTO, toPostAndUserDTO } from "../DTO";
+import { toCreatePostDTO } from "../DTO";
 
-describe("repository", () => {
-  describe("post dto", () => {
-    it("ドメインオブジェクトからCreatePostDTOを生成", () => {
+describe("repository", (): void => {
+  describe("post dto", (): void => {
+    it("ドメインオブジェクトからCreatePostDTOを生成", (): void => {
       const post = new Post(1, "hoge", 2);
       const dto = toCreatePostDTO(post);
       const expected = {

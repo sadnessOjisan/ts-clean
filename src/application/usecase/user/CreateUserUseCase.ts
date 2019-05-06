@@ -5,11 +5,11 @@ import { toCreateUserDTO } from "../../../interface/database/repository/user/DTO
 class CreateUserUseCase {
   private userRepository: IUserRepository;
 
-  constructor(userRepository: IUserRepository) {
+  public constructor(userRepository: IUserRepository) {
     this.userRepository = userRepository;
   }
 
-  createUser(user: User) {
+  public createUser(user: User): Promise<User> {
     const userDTO = toCreateUserDTO(user);
     return this.userRepository.create(userDTO);
   }

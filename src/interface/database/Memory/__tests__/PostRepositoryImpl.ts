@@ -4,7 +4,7 @@ import { Post } from "../../../../domain/Post";
 import { User } from "../../../../domain/User";
 import { toPostAndUserDTO, toCreatePostDTO } from "../../repository/post/DTO";
 
-const setup = () => {
+const setup = (): void => {
   DB.posts = [];
   DB.users = [];
   const samplePost1 = new Post(1, "sample", 1);
@@ -17,24 +17,24 @@ const setup = () => {
   DB.users.push(sampleUser2);
 };
 
-describe("repository", () => {
-  describe("memory", () => {
-    it("DBに値が追加されている", () => {
+describe("repository", (): void => {
+  describe("memory", (): void => {
+    it("DBに値が追加されている", (): void => {
       setup();
       const expected = 2;
       expect(DB.posts.length).toBe(expected);
       expect(DB.users.length).toBe(expected);
     });
-    describe("PostRepositoryImpl", () => {
+    describe("PostRepositoryImpl", (): void => {
       const postRepository = new PostRepository();
-      it("DBから値を1つ取り出す", async () => {
+      it("DBから値を1つ取り出す", async (): Promise<void> => {
         const samplePost1 = new Post(1, "sample", 1);
         const row = await postRepository.find(1);
         const user = new User(1, "taro", 12);
         const expected = toPostAndUserDTO(samplePost1, user);
         expect(row).toEqual(expected);
       });
-      it("DBから全ての値を1つ取り出す", async () => {
+      it("DBから全ての値を1つ取り出す", async (): Promise<void> => {
         const rows = await postRepository.findAll();
         for (let i = 0; i++; i < rows.length) {
           const row = rows[i];
@@ -42,7 +42,7 @@ describe("repository", () => {
           expect(row).toEqual(postRow);
         }
       });
-      it("DBに値を1つ追加する", async () => {
+      it("DBに値を1つ追加する", async (): Promise<void> => {
         setup();
         const post = new Post(null, "hoge", 2);
         const createPostDto = toCreatePostDTO(post);

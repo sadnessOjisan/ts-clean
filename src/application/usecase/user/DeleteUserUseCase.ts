@@ -3,11 +3,11 @@ import { IUserRepository } from "../../../interface/database/repository/user/IUs
 class DeleteUserUseCase {
   private userRepository: IUserRepository;
 
-  constructor(userRepository: IUserRepository) {
+  public constructor(userRepository: IUserRepository) {
     this.userRepository = userRepository;
   }
 
-  deleteUser(id: number) {
+  public deleteUser(id: number): Promise<null> {
     return this.userRepository.delete(id);
   }
 }

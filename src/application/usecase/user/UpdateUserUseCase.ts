@@ -5,11 +5,11 @@ import { toUpdateUserDTO } from "../../../interface/database/repository/user/DTO
 class UpdateUserUseCase {
   private userRepository: IUserRepository;
 
-  constructor(userRepository: IUserRepository) {
+  public constructor(userRepository: IUserRepository) {
     this.userRepository = userRepository;
   }
 
-  updateUser(user: User) {
+  public updateUser(user: User): Promise<User> {
     const userDTO = toUpdateUserDTO(user);
     return this.userRepository.update(userDTO);
   }

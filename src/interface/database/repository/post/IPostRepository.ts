@@ -1,4 +1,3 @@
-import { Post } from "../../../../domain/Post";
 import { TCreatePostDTO, TPostAndUserDTO } from "./DTO";
 
 abstract class IPostRepository {

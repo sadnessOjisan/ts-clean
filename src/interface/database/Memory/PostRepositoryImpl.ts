@@ -12,17 +12,19 @@ import {
 } from "../repository/post/DTO";
 
 class PostRepositoryImpl extends IPostRepository {
-  constructor() {
+  public constructor() {
     super();
   }
 
-  async find(id: number): Promise<TPostAndUserDTO> | null {
-    let postResult = DB.posts.filter(post => post.id === id);
+  public async find(id: number): Promise<TPostAndUserDTO> | null {
+    let postResult = DB.posts.filter((post): boolean => post.id === id);
     if (postResult.length === 0) {
       return null;
     }
     const post = postResult[0];
-    let userResult = DB.users.filter(user => user.id === post.userId);
+    let userResult = DB.users.filter(
+      (user): boolean => user.id === post.userId
+    );
     if (userResult.length === 0) {
       return null;
     }
@@ -31,23 +33,27 @@ class PostRepositoryImpl extends IPostRepository {
     return postAndUserDTO;
   }
 
-  async findAll(): Promise<TPostAndUserDTO[]> {
+  public async findAll(): Promise<TPostAndUserDTO[]> {
     let queryResults = DB.posts;
-    const results = queryResults.map(post => {
-      const user = DB.users.find(user => user.id === post.userId);
-      const userName = user ? user.name : null; // optional型がほしい
-      return { id: post.id, content: post.content, userName: userName };
-    });
+    const results = queryResults.map(
+      (post): TPostAndUserDTO => {
+        const user = DB.users.find((user): boolean => user.id === post.userId);
+        const userName = user ? user.name : null; // optional型がほしい
+        return { id: post.id, content: post.content, userName: userName };
+      }
+    );
     return results;
   }
 
-  async create(post: TCreatePostDTO): Promise<TPostAndUserDTO> {
-    const postIds = DB.posts.map(post => post.id);
+  public async create(post: TCreatePostDTO): Promise<TPostAndUserDTO> {
+    const postIds = DB.posts.map((post): number => post.id);
     const maxId: number = Math.max.apply(null, postIds);
     const newId = maxId + 1;
     const newPost = new Post(newId, post.content, post.userId);
     DB.posts.push(newPost);
-    let userResult = DB.users.filter(user => user.id === newPost.userId);
+    let userResult = DB.users.filter(
+      (user): boolean => user.id === newPost.userId
+    );
     if (userResult.length === 0) {
       return null;
     }
@@ -55,10 +61,12 @@ class PostRepositoryImpl extends IPostRepository {
     return toPostAndUserDTO(newPost, user);
   }
 
-  async delete(id: number): Promise<null> {
-    DB.posts = DB.posts.filter(post => {
-      return post.id !== id;
-    });
+  public async delete(id: number): Promise<null> {
+    DB.posts = DB.posts.filter(
+      (post): boolean => {
+        return post.id !== id;
+      }
+    );
     return null;
   }
 }

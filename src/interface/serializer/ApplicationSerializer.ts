@@ -2,21 +2,21 @@ import moment from "moment";
 import { TException, StatusCode } from "../../constant/ErrorCode";
 
 class ApplicationSerializer {
-  error(error: Error): TResponse<{}> {
+  public error(error: Error): TResponse<{}> {
     try {
       const err: TException = JSON.parse(error.message);
       return {
         code: err.code,
         errorName: error.name,
         message: err.message,
-        responsed_at: moment().format()
+        responsedAt: moment().format()
       };
     } catch {
       return {
         code: StatusCode.exception,
         errorName: error.name,
         message: "err obj parse error",
-        responsed_at: moment().format()
+        responsedAt: moment().format()
       };
     }
   }
@@ -26,7 +26,7 @@ type TResponse<T> =
   | {
       code: typeof StatusCode.success;
       data: T;
-      responsed_at: string;
+      responsedAt: string;
     }
   | {
       code:
@@ -35,7 +35,7 @@ type TResponse<T> =
         | typeof StatusCode.undefined;
       errorName?: string;
       message: string;
-      responsed_at: string;
+      responsedAt: string;
     };
 
 export { ApplicationSerializer, TResponse, StatusCode };
