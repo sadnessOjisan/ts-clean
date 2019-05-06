@@ -1,9 +1,9 @@
-import { TypedRequest } from "../ExpressRequest";
-import { StatusCode } from "../../../constant/ErrorCode";
+import { TypedRequest } from '../ExpressRequest';
+import { StatusCode } from '../../../constant/ErrorCode';
 
-type Params = {
+interface Params {
   id: string;
-};
+}
 
 export class FindUserRequest {
   private _id: number;
@@ -21,11 +21,11 @@ export class FindUserRequest {
     console.log(params);
     const id = params.id;
     const numberId = Number(id);
-    if (typeof numberId !== "number") {
+    if (typeof numberId !== 'number') {
       throw new Error(
         JSON.stringify({
           code: StatusCode.invalid,
-          message: "不正なrequest idです"
+          message: '不正なrequest idです'
         })
       );
     }

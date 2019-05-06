@@ -2,10 +2,10 @@
  * repository層ではdtoを受け取ってDBに渡す役割を担う
  */
 
-import { Post } from "../../../domain/Post";
-import { IPostRepository } from "../repository/post/IPostRepository";
-import { TCreatePostDTO, TPostAndUserDTO } from "../repository/post/DTO";
-import { IDBConnection } from "./IDBConnection";
+import { Post } from '../../../domain/Post';
+import { IPostRepository } from '../repository/post/IPostRepository';
+import { TCreatePostDTO, TPostAndUserDTO } from '../repository/post/DTO';
+import { IDBConnection } from './IDBConnection';
 
 class PostRepositoryImpl extends IPostRepository {
   private connection: IDBConnection;
@@ -16,7 +16,7 @@ class PostRepositoryImpl extends IPostRepository {
 
   async find(id: number): Promise<TPostAndUserDTO> {
     const postResult = await this.connection.execute(
-      "SELECT Posts.id, Posts.content, Users.name AS userName FROM Posts INNER JOIN Users ON Posts.user_id = Users.id;",
+      'SELECT Posts.id, Posts.content, Users.name AS userName FROM Posts INNER JOIN Users ON Posts.user_id = Users.id;',
       id
     );
     if (postResult.length === 0) {
@@ -26,9 +26,9 @@ class PostRepositoryImpl extends IPostRepository {
     return postAndUserDTO;
   }
 
-  async findAll(): Promise<Array<TPostAndUserDTO>> {
+  async findAll(): Promise<TPostAndUserDTO[]> {
     let queryResults = await this.connection.execute(
-      "select Posts.id, Posts.content, Users.name AS userName from Posts INNER JOIN Users ON Posts.user_id = Users.id;"
+      'select Posts.id, Posts.content, Users.name AS userName from Posts INNER JOIN Users ON Posts.user_id = Users.id;'
     );
     return queryResults;
   }
@@ -43,10 +43,10 @@ class PostRepositoryImpl extends IPostRepository {
         postDTO.userId
       })`
     );
-    const idRow = await this.connection.execute("SELECT LAST_INSERT_ID();");
-    const id = idRow[0]["LAST_INSERT_ID()"];
+    const idRow = await this.connection.execute('SELECT LAST_INSERT_ID();');
+    const id = idRow[0]['LAST_INSERT_ID()'];
     const postResult = await this.connection.execute(
-      "SELECT Posts.id, Posts.content, Users.name AS userName FROM Posts INNER JOIN Users ON Posts.user_id = Users.id;",
+      'SELECT Posts.id, Posts.content, Users.name AS userName FROM Posts INNER JOIN Users ON Posts.user_id = Users.id;',
       id
     );
     if (postResult.length === 0) {
@@ -57,7 +57,7 @@ class PostRepositoryImpl extends IPostRepository {
   }
 
   async delete(id: number): Promise<null> {
-    await this.connection.execute("delete from Posts where id = ?", id);
+    await this.connection.execute('delete from Posts where id = ?', id);
     return null;
   }
 }

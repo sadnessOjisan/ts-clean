@@ -1,7 +1,7 @@
-import { TypedRequest } from "../ExpressRequest";
+import { TypedRequest } from '../ExpressRequest';
 
-type Params = {
+interface Params {
   id: string;
-};
+}
 
 export type TFindPostRequest = TypedRequest<Params>;

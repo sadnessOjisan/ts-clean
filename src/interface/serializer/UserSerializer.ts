@@ -1,23 +1,23 @@
-import { User } from "../../domain/User";
-import moment from "moment";
+import { User } from '../../domain/User';
+import moment from 'moment';
 import {
   ApplicationSerializer,
   TResponse,
   StatusCode
-} from "./ApplicationSerializer";
+} from './ApplicationSerializer';
 
-type UserResponse = {
+interface UserResponse {
   id: number;
   name: string;
   age: number;
-};
+}
 
 export class UserSerializer extends ApplicationSerializer {
   user(data: User): TResponse<UserResponse> {
     if (!data) {
       return {
         code: StatusCode.exception,
-        message: "data is null",
+        message: 'data is null',
         responsed_at: moment().format()
       };
     }
@@ -36,7 +36,7 @@ export class UserSerializer extends ApplicationSerializer {
     if (!data) {
       return {
         code: StatusCode.exception,
-        message: "data is null",
+        message: 'data is null',
         responsed_at: moment().format()
       };
     }

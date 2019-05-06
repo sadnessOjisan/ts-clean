@@ -1,9 +1,9 @@
-import { Request } from "express";
+import { Request } from 'express';
 
-type Params = {
+interface Params {
   name: string;
   age: number;
-};
+}
 
 export interface IUpdateUserRequest extends Request {
   params: {
@@ -32,10 +32,10 @@ export class UpdateUserRequest {
 
   private valid(params: Params) {
     if (params.name.length < 4) {
-      throw new Error("4文字以上の名前");
+      throw new Error('4文字以上の名前');
     }
     if (params.age < 12) {
-      throw new Error("登録は12才から");
+      throw new Error('登録は12才から');
     }
   }
 }

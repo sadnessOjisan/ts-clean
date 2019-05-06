@@ -15,14 +15,17 @@ const postController = new Controller.PostController(con);
 const router = express.Router();
 
 // user
-router.get("/users", async (_, res: express.Response) => {
-  let results = await userController.findAllUser();
-  res.send(results);
-});
+router.get(
+  "/users",
+  async (_, res: express.Response): void => {
+    let results = await userController.findAllUser();
+    res.send(results);
+  }
+);
 
 router.get(
   "/users/:id",
-  async (req: TFindUserRequest, res: express.Response) => {
+  async (req: TFindUserRequest, res: express.Response): void => {
     let result = await userController.findUser(req);
     res.send(result);
   }
@@ -30,7 +33,7 @@ router.get(
 
 router.post(
   "/users",
-  async (req: TCreateUserRequest, res: express.Response) => {
+  async (req: TCreateUserRequest, res: express.Response): void => {
     let result = await userController.createUser(req);
     res.send(result);
   }
@@ -38,7 +41,7 @@ router.post(
 
 router.patch(
   "/users/:id",
-  async (req: IUpdateUserRequest, res: express.Response) => {
+  async (req: IUpdateUserRequest, res: express.Response): void => {
     let result = await userController.updateUser(req);
     res.send(result);
   }
@@ -46,21 +49,24 @@ router.patch(
 
 router.delete(
   "/users/:id",
-  async (req: TDeleteUserRequest, res: express.Response) => {
+  async (req: TDeleteUserRequest, res: express.Response): void => {
     let result = await userController.deleteUser(req);
     res.send(result);
   }
 );
 
 // post
-router.get("/posts", async (_, res: express.Response) => {
-  let results = await postController.findAllPost();
-  res.send(results);
-});
+router.get(
+  "/posts",
+  async (_, res: express.Response): void => {
+    let results = await postController.findAllPost();
+    res.send(results);
+  }
+);
 
 router.get(
   "/posts/:id",
-  async (req: TFindPostRequest, res: express.Response) => {
+  async (req: TFindPostRequest, res: express.Response): void => {
     let result = await postController.findPost(req);
     res.send(result);
   }
@@ -68,7 +74,7 @@ router.get(
 
 router.post(
   "/posts",
-  async (req: TCreatePostRequest, res: express.Response) => {
+  async (req: TCreatePostRequest, res: express.Response): void => {
     let result = await postController.createPost(req);
     res.send(result);
   }
@@ -76,7 +82,7 @@ router.post(
 
 router.delete(
   "/posts/:id",
-  async (req: TDeletePostRequest, res: express.Response) => {
+  async (req: TDeletePostRequest, res: express.Response): void => {
     let result = await postController.deletePost(req);
     res.send(result);
   }

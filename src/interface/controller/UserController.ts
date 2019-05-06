@@ -1,17 +1,17 @@
 import {
   CreateUserRequest,
   TCreateUserRequest
-} from "../request/user/CreateUserRequest";
-import { UserSerializer } from "../serializer/UserSerializer";
-import { UserRepository } from "../database/MySQL/UserRepositoryImpl";
-import UserUseCase from "../../application/usecase/user";
-import { IUpdateUserRequest } from "../request/user/UpdateUserRequest";
-import { IDBConnection } from "../database/MySQL/IDBConnection";
-import { User } from "../../domain/User";
+} from '../request/user/CreateUserRequest';
+import { UserSerializer } from '../serializer/UserSerializer';
+import { UserRepository } from '../database/MySQL/UserRepositoryImpl';
+import UserUseCase from '../../application/usecase/user';
+import { IUpdateUserRequest } from '../request/user/UpdateUserRequest';
+import { IDBConnection } from '../database/MySQL/IDBConnection';
+import { User } from '../../domain/User';
 import {
   TFindUserRequest,
   FindUserRequest
-} from "../request/user/FindUserRequest";
+} from '../request/user/FindUserRequest';
 
 class UserController {
   private userSerializer: UserSerializer;

@@ -1,9 +1,16 @@
-import { User } from "../../../../domain/User";
-import { Post } from "../../../../domain/Post";
+import { User } from '../../../../domain/User';
+import { Post } from '../../../../domain/Post';
 
-type TCreatePostDTO = { content: string; userId: number };
+interface TCreatePostDTO {
+  content: string;
+  userId: number;
+}
 
-type TPostAndUserDTO = { id: number; content: string; userName: string };
+interface TPostAndUserDTO {
+  id: number;
+  content: string;
+  userName: string;
+}
 
 /**
  * postドメインオブジェクトをDTOに変換する関数

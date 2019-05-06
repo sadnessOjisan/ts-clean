@@ -1,7 +1,7 @@
-import { User } from "../../../domain/User";
-import { IUserRepository } from "../repository/user/IUserRepository";
-import { IDBConnection } from "./IDBConnection";
-import { TUpdateUserDTO, TCreateUserDTO } from "../repository/user/DTO";
+import { User } from '../../../domain/User';
+import { IUserRepository } from '../repository/user/IUserRepository';
+import { IDBConnection } from './IDBConnection';
+import { TUpdateUserDTO, TCreateUserDTO } from '../repository/user/DTO';
 
 class UserRepository extends IUserRepository {
   private connection: IDBConnection;
@@ -21,14 +21,14 @@ class UserRepository extends IUserRepository {
 
   async find(id: number): Promise<User> {
     let queryResults = await this.connection.execute(
-      "select * from Users where id = ? limit 1",
+      'select * from Users where id = ? limit 1',
       id
     );
     return this.convertModel(queryResults[0]);
   }
 
-  async findAll(): Promise<Array<User>> {
-    let queryResults = await this.connection.execute("select * from Users");
+  async findAll(): Promise<User[]> {
+    let queryResults = await this.connection.execute('select * from Users');
     const results = queryResults.map((m: any) => {
       return this.convertModel(m);
     });
@@ -46,14 +46,14 @@ class UserRepository extends IUserRepository {
 
   async update(userDTO: TUpdateUserDTO): Promise<User> {
     const result = await this.connection.execute(
-      "update Users set name = ?, age = ?",
+      'update Users set name = ?, age = ?',
       [userDTO.name, userDTO.age]
     );
     return result;
   }
 
   async delete(id: number): Promise<null> {
-    await this.connection.execute("delete from Users where id = ?", id);
+    await this.connection.execute('delete from Users where id = ?', id);
     return null;
   }
 }

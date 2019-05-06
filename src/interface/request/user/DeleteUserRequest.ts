@@ -1,7 +1,7 @@
-import { TypedRequest } from "../ExpressRequest";
+import { TypedRequest } from '../ExpressRequest';
 
-type Params = {
+interface Params {
   id: number;
-};
+}
 
 export type TDeleteUserRequest = TypedRequest<Params>;

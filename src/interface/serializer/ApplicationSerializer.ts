@@ -1,5 +1,5 @@
-import moment from "moment";
-import { TException, StatusCode } from "../../constant/ErrorCode";
+import moment from 'moment';
+import { TException, StatusCode } from '../../constant/ErrorCode';
 
 class ApplicationSerializer {
   error(error: Error): TResponse<{}> {
@@ -15,7 +15,7 @@ class ApplicationSerializer {
       return {
         code: StatusCode.exception,
         errorName: error.name,
-        message: "err obj parse error",
+        message: 'err obj parse error',
         responsed_at: moment().format()
       };
     }

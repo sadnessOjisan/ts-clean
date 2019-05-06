@@ -1,12 +1,15 @@
-import { User } from "../../../../domain/User";
+import { User } from '../../../../domain/User';
 
-type TUpdateUserDTO = {
+interface TUpdateUserDTO {
   id: number;
   name?: string;
   age?: number;
-};
+}
 
-type TCreateUserDTO = { name: string; age: number };
+interface TCreateUserDTO {
+  name: string;
+  age: number;
+}
 
 const toUpdateUserDTO = (user: TUpdateUserDTO) => {
   return { id: user.id, name: user.name, age: user.age };
