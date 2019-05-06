@@ -1,6 +1,6 @@
-import { User } from '../../../domain/User';
-import { IUserRepository } from '../../../interface/database/repository/user/IUserRepository';
-import { toUpdateUserDTO } from '../../../interface/database/repository/user/DTO';
+import { User } from "../../../domain/User";
+import { IUserRepository } from "../../../interface/database/repository/user/IUserRepository";
+import { toUpdateUserDTO } from "../../../interface/database/repository/user/DTO";
 
 class UpdateUserUseCase {
   private userRepository: IUserRepository;

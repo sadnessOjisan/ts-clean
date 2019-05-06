@@ -1,4 +1,4 @@
-import { User } from '../../../../domain/User';
+import { User } from "../../../../domain/User";
 
 interface TUpdateUserDTO {
   id: number;

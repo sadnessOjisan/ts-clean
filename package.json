@@ -31,6 +31,7 @@
     "start:local": "node dist/main.js",
     "dev": "yarn run build:local && yarn run start:local",
     "test": "jest",
-    "lint": "eslint --fix --ext .ts ./src"
+    "lint": "eslint --fix --ext .ts ./src",
+    "format": "prettier --write './src/**/*.{ts,js,json}'"
   }
 }

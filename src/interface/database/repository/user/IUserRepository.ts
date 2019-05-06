@@ -1,5 +1,5 @@
-import { User } from '../../../../domain/User';
-import { TUpdateUserDTO, TCreateUserDTO } from './DTO';
+import { User } from "../../../../domain/User";
+import { TUpdateUserDTO, TCreateUserDTO } from "./DTO";
 
 abstract class IUserRepository {
   abstract async findAll(): Promise<User[]>;

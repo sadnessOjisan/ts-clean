@@ -1,5 +1,5 @@
-import { TypedRequestBody } from '../ExpressRequest';
-import { StatusCode } from '../../../constant/ErrorCode';
+import { TypedRequestBody } from "../ExpressRequest";
+import { StatusCode } from "../../../constant/ErrorCode";
 
 interface Params {
   name: string;
@@ -31,7 +31,7 @@ export class CreateUserRequest {
       throw new Error(
         JSON.stringify({
           code: StatusCode.invalid,
-          message: '4文字以上の名前'
+          message: "4文字以上の名前"
         })
       );
     }
@@ -39,7 +39,7 @@ export class CreateUserRequest {
       throw new Error(
         JSON.stringify({
           code: StatusCode.invalid,
-          message: '登録は12才から'
+          message: "登録は12才から"
         })
       );
     }

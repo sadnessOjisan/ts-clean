@@ -1,13 +1,13 @@
 import {
   CreatePostRequest,
   TCreatePostRequest
-} from '../request/post/CreatePostRequest';
-import { PostSerializer } from '../serializer/PostSerializer';
-import { PostRepository } from '../database/MySQL/PostRepositoryImpl';
-import PostUseCase from '../../application/usecase/post';
-import { Post } from '../../domain/Post';
-import { TFindUserRequest } from '../request/user/FindUserRequest';
-import { IDBConnection } from '../database/MySQL/IDBConnection';
+} from "../request/post/CreatePostRequest";
+import { PostSerializer } from "../serializer/PostSerializer";
+import { PostRepository } from "../database/MySQL/PostRepositoryImpl";
+import PostUseCase from "../../application/usecase/post";
+import { Post } from "../../domain/Post";
+import { TFindUserRequest } from "../request/user/FindUserRequest";
+import { IDBConnection } from "../database/MySQL/IDBConnection";
 
 class PostController {
   private postSerializer: PostSerializer;

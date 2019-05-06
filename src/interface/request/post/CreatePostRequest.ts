@@ -1,5 +1,5 @@
-import { TypedRequestBody } from '../ExpressRequest';
-import { PostBusinessRule } from '../../../domain/Post';
+import { TypedRequestBody } from "../ExpressRequest";
+import { PostBusinessRule } from "../../../domain/Post";
 
 interface Params {
   content: string;
@@ -28,7 +28,7 @@ export class CreatePostRequest {
 
   private valid(params: Params) {
     if (!PostBusinessRule.isPostLengthValid(params.content)) {
-      throw new Error('1以上255以下の文字数でおねがいします');
+      throw new Error("1以上255以下の文字数でおねがいします");
     }
   }
 }

@@ -1,10 +1,10 @@
-import moment from 'moment';
+import moment from "moment";
 import {
   ApplicationSerializer,
   TResponse,
   StatusCode
-} from './ApplicationSerializer';
-import { TPostAndUserDTO } from '../database/repository/post/DTO';
+} from "./ApplicationSerializer";
+import { TPostAndUserDTO } from "../database/repository/post/DTO";
 
 interface PostResponse {
   id: number;
@@ -17,7 +17,7 @@ export class PostSerializer extends ApplicationSerializer {
     if (!data) {
       return {
         code: StatusCode.exception,
-        message: 'data is null',
+        message: "data is null",
         responsed_at: moment().format()
       };
     }
@@ -32,7 +32,7 @@ export class PostSerializer extends ApplicationSerializer {
     if (!data) {
       return {
         code: StatusCode.exception,
-        message: 'data is null',
+        message: "data is null",
         responsed_at: moment().format()
       };
     }
@@ -46,11 +46,11 @@ export class PostSerializer extends ApplicationSerializer {
   }
 
   createPost(data: TPostAndUserDTO): TResponse<PostResponse> {
-    console.log('data: ', data);
+    console.log("data: ", data);
     if (!data) {
       return {
         code: StatusCode.exception,
-        message: 'data is null',
+        message: "data is null",
         responsed_at: moment().format()
       };
     }

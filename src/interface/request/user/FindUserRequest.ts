@@ -1,5 +1,5 @@
-import { TypedRequest } from '../ExpressRequest';
-import { StatusCode } from '../../../constant/ErrorCode';
+import { TypedRequest } from "../ExpressRequest";
+import { StatusCode } from "../../../constant/ErrorCode";
 
 interface Params {
   id: string;
@@ -21,11 +21,11 @@ export class FindUserRequest {
     console.log(params);
     const id = params.id;
     const numberId = Number(id);
-    if (typeof numberId !== 'number') {
+    if (typeof numberId !== "number") {
       throw new Error(
         JSON.stringify({
           code: StatusCode.invalid,
-          message: '不正なrequest idです'
+          message: "不正なrequest idです"
         })
       );
     }

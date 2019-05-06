@@ -1,7 +1,7 @@
-import mysql from 'mysql';
-import dotenv from 'dotenv';
-import util from 'util';
-import { IDBConnection } from '../interface/database/MySQL/IDBConnection';
+import mysql from "mysql";
+import dotenv from "dotenv";
+import util from "util";
+import { IDBConnection } from "../interface/database/MySQL/IDBConnection";
 
 export class MysqlConnection extends IDBConnection {
   private pool: any;
@@ -22,14 +22,14 @@ export class MysqlConnection extends IDBConnection {
     this.pool.getConnection((error: any, connection: any) => {
       if (error) {
         console.error(error);
-        if (error.code === 'PROTOCOL_CONNECTION_LOST') {
-          console.error('Database connection was closed.');
+        if (error.code === "PROTOCOL_CONNECTION_LOST") {
+          console.error("Database connection was closed.");
         }
-        if (error.code === 'ER_CON_COUNT_ERROR') {
-          console.error('Database has too many connections.');
+        if (error.code === "ER_CON_COUNT_ERROR") {
+          console.error("Database has too many connections.");
         }
-        if (error.code === 'ECONNREFUSED') {
-          console.error('Database connection was refused.');
+        if (error.code === "ECONNREFUSED") {
+          console.error("Database connection was refused.");
         }
       }
 
@@ -40,12 +40,12 @@ export class MysqlConnection extends IDBConnection {
     this.pool.query = util.promisify(this.pool.query);
 
     // pool event
-    this.pool.on('connection', (connection: any) => {
-      console.log('mysql connection create');
+    this.pool.on("connection", (connection: any) => {
+      console.log("mysql connection create");
     });
 
-    this.pool.on('release', (connection: any) => {
-      console.log('Connection %d released', connection.threadId);
+    this.pool.on("release", (connection: any) => {
+      console.log("Connection %d released", connection.threadId);
     });
   }
 

@@ -2,14 +2,14 @@
  * repository層ではdtoを受け取ってDBに渡す役割を担う
  */
 
-import DB from './MemoryDataBase';
-import { Post } from '../../../domain/Post';
-import { IPostRepository } from '../repository/post/IPostRepository';
+import DB from "./MemoryDataBase";
+import { Post } from "../../../domain/Post";
+import { IPostRepository } from "../repository/post/IPostRepository";
 import {
   TCreatePostDTO,
   TPostAndUserDTO,
   toPostAndUserDTO
-} from '../repository/post/DTO';
+} from "../repository/post/DTO";
 
 class PostRepositoryImpl extends IPostRepository {
   constructor() {

@@ -1,5 +1,5 @@
-import { User } from '../../../../domain/User';
-import { Post } from '../../../../domain/Post';
+import { User } from "../../../../domain/User";
+import { Post } from "../../../../domain/Post";
 
 interface TCreatePostDTO {
   content: string;

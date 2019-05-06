@@ -1,4 +1,4 @@
-import { TypedRequest } from '../ExpressRequest';
+import { TypedRequest } from "../ExpressRequest";
 
 interface Params {
   id: string;
