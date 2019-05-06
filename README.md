@@ -12,8 +12,6 @@ $ yarn run build:local
 $ yarn run start:local
 ```
 
-/api/users/:id, /api/users に access 可能
-
 ### Docker の起動
 
 ```
@@ -68,5 +66,7 @@ $ curl -X DELETE localhost:3000/api/posts/2
 
 - validation めんどくさい
 - 例外を上にあげるのめんどくさい
-- inteliJ の自動生成ほしい
+- inteliJ + lombok の自動生成ほしい
 - swagger ほしい
+
+つぎ、Nest やる。
