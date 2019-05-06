@@ -1,4 +1,3 @@
-import { Request } from "express";
 import {
   CreatePostRequest,
   TCreatePostRequest
@@ -30,7 +29,7 @@ class PostController {
     }
   }
 
-  async findAllPost(req: Request) {
+  async findAllPost() {
     const useCase = new PostUseCase.FindPostUseCase(this.postRepository);
     let result = await useCase.getAllPosts();
     return this.postSerializer.posts(result);

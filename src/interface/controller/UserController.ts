@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import {
   CreateUserRequest,
   TCreateUserRequest
@@ -38,7 +37,7 @@ class UserController {
     }
   }
 
-  async findAllUser(req: Request) {
+  async findAllUser() {
     const useCase = new FindUser(this.userRepository);
     let result = await useCase.getAllUsers();
     return this.userSerializer.users(result);

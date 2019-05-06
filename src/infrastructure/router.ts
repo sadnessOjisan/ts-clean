@@ -1,4 +1,4 @@
-import express = require("express");
+import express from "express";
 // TODO: controllerを集約したい
 import { UserController } from "../interface/controller/UserController";
 import { PostController } from "../interface/controller/PostController";
@@ -17,8 +17,8 @@ const postController = new PostController(con);
 const router = express.Router();
 
 // user
-router.get("/users", async (req: express.Request, res: express.Response) => {
-  let results = await userController.findAllUser(req);
+router.get("/users", async (_, res: express.Response) => {
+  let results = await userController.findAllUser();
   res.send(results);
 });
 
@@ -55,8 +55,8 @@ router.delete(
 );
 
 // post
-router.get("/posts", async (req: express.Request, res: express.Response) => {
-  let results = await postController.findAllPost(req);
+router.get("/posts", async (_, res: express.Response) => {
+  let results = await postController.findAllPost();
   res.send(results);
 });
 
