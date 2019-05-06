@@ -1,6 +1,6 @@
 import { IUserRepository } from "../../../interface/database/repository/user/IUserRepository";
 
-class FindUser {
+class FindUserUseCase {
   private userRepository: IUserRepository;
 
   constructor(userRepository: IUserRepository) {
@@ -16,4 +16,4 @@ class FindUser {
   }
 }
 
-export { FindUser };
+export { FindUserUseCase };

@@ -1,7 +1,5 @@
 import express from "express";
-// TODO: controllerを集約したい
-import { UserController } from "../interface/controller/UserController";
-import { PostController } from "../interface/controller/PostController";
+import Controller from "../interface/controller";
 import { TCreateUserRequest } from "../interface/request/user/CreateUserRequest";
 import { TFindUserRequest } from "../interface/request/user/FindUserRequest";
 import { IUpdateUserRequest } from "../interface/request/user/UpdateUserRequest";
@@ -12,8 +10,8 @@ import { TDeletePostRequest } from "../interface/request/post/DeletePostRequest"
 import { MysqlConnection } from "../infrastructure/MysqlConnection";
 
 const con = new MysqlConnection();
-const userController = new UserController(con);
-const postController = new PostController(con);
+const userController = new Controller.UserController(con);
+const postController = new Controller.PostController(con);
 const router = express.Router();
 
 // user
