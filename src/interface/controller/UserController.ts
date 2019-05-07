@@ -3,10 +3,9 @@ import {
   TCreateUserRequest
 } from "../request/user/CreateUserRequest";
 import { UserSerializer, UserResponse } from "../serializer/UserSerializer";
-import { UserRepository } from "../database/MySQL/UserRepositoryImpl";
+import { UserRepository } from "../database/Memory/UserRepositoryImpl";
 import UserUseCase from "../../application/usecase/user";
 import { UpdateUserRequest } from "../request/user/UpdateUserRequest";
-import { IDBConnection } from "../database/MySQL/IDBConnection";
 import { User } from "../../domain/User";
 import {
   TFindUserRequest,
@@ -19,12 +18,11 @@ class UserController {
   private userSerializer: UserSerializer;
   private userRepository: UserRepository;
 
-  public constructor(dbConnection: IDBConnection) {
+  public constructor() {
     this.userSerializer = new UserSerializer();
-    this.userRepository = new UserRepository(dbConnection);
+    this.userRepository = new UserRepository();
   }
 
-  // MEMO: これJavaだったらannotationつけるだけで例外のハンドリングできるんだよなぁ・・・
   public async findUser(
     req: TFindUserRequest
   ): Promise<TResponse<UserResponse> | TResponse<{}>> {
@@ -38,7 +36,6 @@ class UserController {
     }
   }
 
-  // TODO: asyncは不要
   public async findAllUser(): Promise<
     TResponse<UserResponse[]> | TResponse<{}>
   > {
@@ -51,7 +48,6 @@ class UserController {
     req: TCreateUserRequest
   ): Promise<TResponse<UserResponse> | TResponse<{}>> {
     try {
-      // MEMO: validationをするためにもRequestクラスからのinstance化は必要そう
       const userParams = new CreateUserRequest(req.body);
       const useCase = new UserUseCase.CreateUserUseCase(this.userRepository);
       const user = new User(null, userParams.name, userParams.age);

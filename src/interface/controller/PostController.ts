@@ -3,11 +3,10 @@ import {
   TCreatePostRequest
 } from "../request/post/CreatePostRequest";
 import { PostSerializer, PostResponse } from "../serializer/PostSerializer";
-import { PostRepository } from "../database/MySQL/PostRepositoryImpl";
+import { PostRepository } from "../database/Memory/PostRepositoryImpl";
 import PostUseCase from "../../application/usecase/post";
 import { Post } from "../../domain/Post";
 import { TFindUserRequest } from "../request/user/FindUserRequest";
-import { IDBConnection } from "../database/MySQL/IDBConnection";
 import { TDeletePostRequest } from "../request/post/DeletePostRequest";
 import { TResponse } from "../serializer/ApplicationSerializer";
 
@@ -15,9 +14,9 @@ class PostController {
   private postSerializer: PostSerializer;
   private postRepository: PostRepository;
 
-  public constructor(dbConnection: IDBConnection) {
+  public constructor() {
     this.postSerializer = new PostSerializer();
-    this.postRepository = new PostRepository(dbConnection);
+    this.postRepository = new PostRepository();
   }
 
   public async findPost(

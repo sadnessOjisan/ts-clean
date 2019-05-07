@@ -47,7 +47,8 @@ class PostRepositoryImpl extends IPostRepository {
 
   public async create(post: TCreatePostDTO): Promise<TPostAndUserDTO> {
     const postIds = DB.posts.map((post): number => post.id);
-    const maxId: number = Math.max.apply(null, postIds);
+    const maxId: number =
+      postIds.length === 0 ? 0 : Math.max.apply(null, postIds);
     const newId = maxId + 1;
     const newPost = new Post(newId, post.content, post.userId);
     DB.posts.push(newPost);
