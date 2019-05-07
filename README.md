@@ -60,12 +60,3 @@ $ curl localhost:3000/api/posts/1
 # post削除
 $ curl -X DELETE localhost:3000/api/posts/2
 ```
-
-## ts + express で厳しいと思ったところ
-
-- validation めんどくさい
-- 例外を上にあげるのめんどくさい
-- inteliJ + lombok の自動生成ほしい
-- swagger ほしい
-
-つぎ、Nest やる。
